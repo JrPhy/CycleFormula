@@ -5,16 +5,15 @@
     <title>Simple template</title>
   </head>
   <body>
-    <script>
-      (async () => {
-          const res = await fetch("hello-world.wasm");
-          const wasmFile = await res.arrayBuffer();
-          const module = await WebAssembly.compile(wasmFile);
-          const instance = await WebAssembly.instantiate(module);
-  
-          const square = instance.exports.main();
-          document.write("The square of 13 = " + square);
-      })();
-  </script>
+    <script type="text/javascript"> 
+   fetch("hello-world.wasm") .then(bytes => bytes.arrayBuffer()) 
+   .then(mod => WebAssembly.compile(mod)) 
+   .then(module => {
+      return new WebAssembly.Instance(module) 
+   }) 
+   .then(instance => {
+      console.log(instance);
+   }); 
+</script>
   </body>
 </html>
