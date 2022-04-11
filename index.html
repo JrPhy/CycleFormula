@@ -13,7 +13,7 @@
           const instance = await WebAssembly.instantiate(module);
   
           const square = instance.exports.square(13);
-          console.log("The square of 13 = " + square);
+          document.write("The square of 13 = " + square);
       })();
   </script>
   </body>
