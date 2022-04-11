@@ -1,4 +1,6 @@
-int square(int a)
+#include <stdio.h>
+
+int main()
 {
-	return a*a;
+	printf("hello-world");
 }
