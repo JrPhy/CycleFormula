@@ -11,7 +11,7 @@
             const wasmFile = await res.arrayBuffer();
             const module = await WebAssembly.compile(wasmFile);
             const instance = await WebAssembly.instantiate(module);
-            document.write(instance);
+            document.write(instance.exports.main());
         })();
     </script>
   </body>
