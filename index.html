@@ -11,6 +11,8 @@
             const wasmFile = await res.arrayBuffer();
             const module = await WebAssembly.compile(wasmFile);
             const instance = await WebAssembly.instantiate(module);
+
+            const square = instance.exports.square(13);
             document.write(instance.exports.main());
         })();
     </script>
