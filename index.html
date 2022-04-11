@@ -5,15 +5,14 @@
     <title>Simple template</title>
   </head>
   <body>
-    <script type="text/javascript"> 
-   fetch("hello-world.wasm") .then(bytes => bytes.arrayBuffer()) 
-   .then(mod => WebAssembly.compile(mod)) 
-   .then(module => {
-      return new WebAssembly.Instance(module) 
-   }) 
-   .then(instance => {
-      document.write(instance);
-   }); 
-</script>
+    <script>
+        (async () => {
+            const res = await fetch("hello-world.wasm");
+            const wasmFile = await res.arrayBuffer();
+            const module = await WebAssembly.compile(wasmFile);
+            const instance = await WebAssembly.instantiate(module);
+            document.write(instance);
+        })();
+    </script>
   </body>
 </html>
