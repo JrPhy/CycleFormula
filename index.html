@@ -12,7 +12,7 @@
           const module = await WebAssembly.compile(wasmFile);
           const instance = await WebAssembly.instantiate(module);
   
-          const square = instance.exports.square(13);
+          const square = instance.exports.main();
           document.write("The square of 13 = " + square);
       })();
   </script>
