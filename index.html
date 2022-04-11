@@ -1,12 +1,20 @@
-<!DOCTYPE html>
+<!DOCTYPE  html>
 <html>
   <head>
-    <meta charset="UTF-8" />
-    <title>Hello World - AssemblyScript</title>
-    <link rel="preload" href="./hello-world.js" as="script" />
+    <meta  charset="utf-8">
+    <title>Simple template</title>
   </head>
   <body>
-    <p> hello world </p>
-    <script type="module" src="./hello-world.js"></script>
+    <script>
+      (async () => {
+          const res = await fetch("hello-world.wasm");
+          const wasmFile = await res.arrayBuffer();
+          const module = await WebAssembly.compile(wasmFile);
+          const instance = await WebAssembly.instantiate(module);
+  
+          const square = instance.exports.square(13);
+          console.log("The square of 13 = " + square);
+      })();
+  </script>
   </body>
 </html>
