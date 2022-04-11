@@ -1,4 +1,3 @@
-#include <stdio.h>
-int main() {
-   printf("Hello World"); 
+int square(int n) { 
+   return n*n; 
 }
