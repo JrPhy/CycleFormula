@@ -1,4 +1,4 @@
 #include <stdio.h>
-char *c_hello() {
-   return "Hello World"; 
+int main() {
+   printf("Hello World"); 
 }
