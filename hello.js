@@ -1,28 +1,13 @@
-export const wasmBrowserInstantiate = async (wasmModuleUrl, importObject) => {
-  let response = undefined;
+import { wasmBrowserInstantiate } from "/demo-util/instantiateWasm.js";
 
-  if (!importObject) {
-    importObject = {
-      env: {
-        abort: () => console.log("Abort!")
-      }
-    };
-  }
+const runWasmAdd = async () => {
+  // Instantiate our wasm module
+  const wasmModule = await wasmBrowserInstantiate("./hello.wasm");
 
-  if (WebAssembly.instantiateStreaming) {
-    response = await WebAssembly.instantiateStreaming(
-      fetch(wasmModuleUrl),
-      importObject
-    );
-  } else {
-    const fetchAndInstantiateTask = async () => {
-      const wasmArrayBuffer = await fetch(wasmModuleUrl).then(response =>
-        response.arrayBuffer()
-      );
-      return WebAssembly.instantiate(wasmArrayBuffer, importObject);
-    };
-    response = await fetchAndInstantiateTask();
-  }
+  // Call the Add function export from wasm, save the result
+  const addResult = wasmModule.instance.exports.add(24, 24);
 
-  return response;
+  // Set the result onto the body
+  document.body.textContent = `Hello World! addResult: ${addResult}`;
 };
+runWasmAdd();
