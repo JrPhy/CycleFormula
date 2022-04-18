@@ -1,20 +1,97 @@
-<!DOCTYPE  html>
+<!DOCTYPE HTML>
+<!--
+	  Editorial by HTML5 UP
+	  html5up.net | @ajlkn
+	  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <html>
-  <head>
-    <meta  charset="utf-8">
-    <title>Simple template</title>
-  </head>
-  <body>
-    <script>
-        (async () => {
-            const res = await fetch("hello-world.wasm");
-            const wasmFile = await res.arrayBuffer();
-            const module = await WebAssembly.compile(wasmFile);
-            const instance = await WebAssembly.instantiate(module);
+	  <head>
+		    <title>單車新幹線Cycle Formula</title>
+		    <meta charset="utf-8" />
+		    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		    <link rel="stylesheet" href="assets/css/main.css" />
+	  </head>
+    <body class="is-preload">
 
-            const square = instance.exports.square(13);
-            document.write("The square of 13 = " + square);
-        })();
-    </script>
-  </body>
-</html>
+      <!-- Wrapper -->
+        <div id="wrapper">
+  
+          <!-- Main -->
+            <div id="main">
+              <div class="inner">
+                <!-- Header -->
+                  <header id="header">
+                    <a href="index.html" class="logo"><strong>Editorial</strong> by HTML5 UP</a>
+                    <ul class="icons">
+                      <li><a href="https://www.facebook.com/CycleFormula" class="icon brands fa-facebook-f" Target="_blank"><span class="label">Facebook</span></a></li>
+                      <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" class="icon brands fa-youtube" Target="_blank"><span class="label">Youtube</span></a></li>
+                    </ul>
+                  </header>
+                <!-- Banner -->
+                    <section id="banner">
+                    <div class="content">
+                      <header>
+                        <h1>歡迎來到<br />
+                        單車新幹線</h1>
+                        <h3>用理論計算來分析單車運動</h3>
+                        <h3>有任何問題與建議可藉由粉絲專頁</h3>
+                        <h3>文章與知識分享請參考左邊選單</h3>
+                      </header>
+                    </div>
+                    <span class="image object">
+                      <img src="images/Cycle_Formula.jpg" alt="" />
+                    </span>
+                  </section>
+              </div>
+            </div>
+  
+				<!-- Sidebar -->
+        <div id="sidebar">
+          <div class="inner">
+
+            <!-- Search -->
+              <section id="search" class="alt">
+                <form method="post" action="#">
+                  <input type="text" name="query" id="query" placeholder="Search" />
+                </form>
+              </section>
+
+            <!-- Menu -->
+              <nav id="menu">
+                <header class="major">
+                  <h2>選單</h2>
+                </header>
+                <ul>
+                  <li><a href="index.html"><h3>首頁</h3></a></li>
+                  <li><a href="route_cal.html"><h3>路段做功計算機</h3></a></li>
+                  <li>
+                    <span class="opener"><h3>騎乘技巧的理論分析</h3></span>
+                    <ul>
+                      <li><a href="#"><h3>Lorem Dolor</h3></a></li>
+                      <li><a href="#"><h3>Ipsum Adipiscing</h3></a></li>
+                      <li><a href="#"><h3>Tempus Magna</h3></a></li>
+                      <li><a href="#"><h3>Feugiat Veroeros</h3></a></li>
+                    </ul>
+                  </li>
+                  <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3>粉絲專頁</h3></a></li>
+                  <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3>頻道影片</h3></a></li>
+                </ul>
+              </nav>
+            <!-- Footer -->
+              <footer id="footer">
+                <p class="copyright">&copy; 網頁樣板: <a href="https://html5up.net/editorial">editorial</a>. Design: <a href="https://html5up.net/editorial">HTML5 UP</a>.</p>
+                                  <p class="copyright">&copy; 內容與算法: 單車新幹線Cycle Formula</p>
+              </footer>
+          </div>
+        </div>
+    </div>
+  
+      <!-- Scripts -->
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+  
+    </body>
+  </html>
