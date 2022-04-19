@@ -195,7 +195,7 @@ var Module = typeof Module != 'undefined' ? Module : {};
     }
 
     }
-    loadPackage({"files": [{"filename": "/license.asc", "start": 0, "end": 975}], "remote_package_size": 975, "package_uuid": "fceb432b-5cf1-4eab-bea0-72251924c304"});
+    loadPackage({"files": [{"filename": "/license.asc", "start": 0, "end": 975}], "remote_package_size": 975, "package_uuid": "07e0fb10-5347-4bcb-a39e-f3620017e611"});
 
   })();
 
@@ -4404,6 +4404,10 @@ var ASM_CONSTS = {
   }
   }
 
+  function __emscripten_date_now() {
+      return Date.now();
+    }
+
   function _emscripten_memcpy_big(dest, src, num) {
       HEAPU8.copyWithin(dest, src, src + num);
     }
@@ -4773,6 +4777,7 @@ var asmLibraryArg = {
   "__syscall_fcntl64": ___syscall_fcntl64,
   "__syscall_ioctl": ___syscall_ioctl,
   "__syscall_openat": ___syscall_openat,
+  "_emscripten_date_now": __emscripten_date_now,
   "emscripten_memcpy_big": _emscripten_memcpy_big,
   "emscripten_resize_heap": _emscripten_resize_heap,
   "exit": _exit,
