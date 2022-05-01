@@ -16,48 +16,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 	</head>
 	<head>
-		<script>
-            Module = {};
-		    Module.onRuntimeInitialized = function() 
-            {
-                return Module._work;
-            }
-            function Cal(form)
-            {
-                const formElement = document.getElementById('form');
-                const route = document.getElementById('route');
-                const riderMass = Number(formElement[0].value);
-                const bikeMass = Number(formElement[1].value);
-                const wantTime = formElement[2].value;
-                let duration = wantTime.split(':');
-                timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
-                if(riderMass < 1 || bikeMass < 1 || timeSeg < 1)
-                {
-                    form.WORK.value = "請輸入正確的數字";
-                    form.Pavg.value = "請輸入正確的數字";
-                }
-                else
-                {
-                    form.WORK.value = Module._work(riderMass, bikeMass, route, timeSeg);
-                    form.Pavg.value = (form.WORK.value*1000/timeSeg).toFixed(1);
-                    if (form.WORK.value == -2)
-                    {
-                        form.WORK.value = "license 過期了";
-                        form.Pavg.value = "請聯絡作者";
-                    }
-                    else if (form.WORK.value == -3)
-                    {
-                        form.WORK.value = "license 被修改過";
-                        form.Pavg.value = "請聯絡作者";
-                    }
-                    else if(form.WORK.value == -1 || isNaN(form.Pavg.value))
-                    {
-                        form.WORK.value = "請輸入正確的數字";
-                        form.Pavg.value = "請輸入正確的數字";
-                    }
-                }
-		    }
-		</script>
+		<script src="assets/js/getData.js"></script>
 		<script src="assets/js/CycleFormula.js"></script>
 	</head>
 
@@ -83,7 +42,7 @@
 										<header>
 											<h1>路段做功計算機<br /></h1>
 											<h3>輸入以下數據來估算某一路段的做功<br /></h3>
-											<p>對標 power tap p1 雙邊數據<br /></p>
+											<p><font color="red">對標 power tap p1 雙邊數據</font><br /></p>
 											<p>可當作練車時的目標，實際騎乘會有些許誤差<br /></p>
 											<p>裝備重包含人身部品及補給，例如：水壺+補給+安全帽+卡鞋+手套<br /></p>
 										</header>
@@ -104,9 +63,9 @@
 											  <tr>
 												<td>路段選擇</td>
 												<td>
-												  <select name="route" onchange="print_value();">
+												  <select name="route">
 													<option value="0" >西進武嶺</option>
-													<option value="1" disabled>東進武嶺</option>
+													<option value="1" >東進武嶺</option>
 													<option value="2" disabled>太平山</option>
 													<option value="3" disabled>梅山36彎</option>
 													</select>
@@ -121,6 +80,10 @@
 											  <tr>
 												<td>平均功率(W)</td>
 												<td><input type="text" name="Pavg" readonly></td>
+											  </tr>
+											  <tr>
+												<td>計算區間</td>
+												<td><input type="text" name="segment" readonly></td>
 											  </tr>
 											</table>
 										  </form>
