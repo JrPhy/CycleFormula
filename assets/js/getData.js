@@ -17,7 +17,8 @@ function Cal(form)
     {form.segment.value = "中心碑 - 武嶺牌樓"}
     else if(route == 1)
     {form.segment.value = "放行點 - 武嶺牌樓"}
-
+    else if(route == 10)
+    {form.segment.value = "Bedoin - Top"}
     if(riderMass < 1 || bikeMass < 1 || timeSeg < 1)
     {
         form.WORK.value = "請輸入正確的數字";
