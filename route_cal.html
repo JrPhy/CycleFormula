@@ -43,9 +43,10 @@
 											<h1>路段做功計算機<br /></h1>
 											<h3>輸入以下數據來估算某一路段的做功<br /></h3>
 											<p><font color="red">對標 power tap p1 雙邊數據</font><br /></p>
-											<p>為預估個人計時的做功，可當作練車時的目標<br /></p>
+											<p>為預估<font color="red"></font>無風，個人計時</font>的做功，可當作練車時的目標<br /></p>
 											<p>實際騎乘會有些許誤差，例如風向，是否跟車輪車等<br /></p>
-											<p>裝備重包含人身部品及補給，例如：水壺+補給+安全帽+卡鞋+手套<br /></p>
+											<p>裝備重包含人身部品，如：安全帽+卡鞋+手套，約一公斤<br /></p>
+											<p>水壺以一瓶 600 mL，果膠以一條 60 g 來做計算<br /></p>
 										</header>
 										<form name="form" id="form" method=post>
 											<table>
@@ -54,8 +55,20 @@
 												<td><input type="number" name="riderMass"><br></td>
 											  </tr>
 											  <tr>
-												<td>車與裝備重量(kg)</td>
+												<td>車子重量(kg)</td>
 												<td><input type="number" name="bikeMass"><br></td>
+											  </tr>
+											  <tr>
+												<td>裝備重量(kg)</td>
+												<td><input type="number" value="1" name="equipMass"><br></td>
+											  </tr>
+											  <tr>
+												<td>預計喝水量(瓶)</td>
+												<td><input type="number" value="2" name="waterMass"><br></td>
+											  </tr>
+											  <tr>
+												<td>預計果膠(條)</td>
+												<td><input type="number" value="6" name="foodMass"><br></td>
 											  </tr>
 											  <tr>
 												<td>目標時間(hh:mm:ss)</td>
