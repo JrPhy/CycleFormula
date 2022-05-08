@@ -40,66 +40,36 @@
 								<section id="banner">
 									<div class="content">
 										<header>
-											<h1>路段做功計算機<br /></h1>
-											<h3>輸入以下數據來估算某一路段的做功<br /></h3>
-											<p><font color="red">對標 power tap p1 雙邊數據</font><br /></p>
-											<p>為預估<font color="red"></font>無風，個人計時</font>的做功，可當作練車時的目標<br /></p>
-											<p>實際騎乘會有些許誤差，例如風向，是否跟車輪車等<br /></p>
-											<p>裝備重包含人身部品，如：安全帽+卡鞋+手套，約一公斤<br /></p>
-											<p>水壺以一瓶 600 mL，果膠以一條 60 g 來做計算<br /></p>
+											<h1>風阻轉換等效重量<br /></h1>
+											<h3>看減少的風阻面積，在爬坡度多少的坡，以時速多少前進時可以省下多少瓦數，<br />
+												接著在相同的坡度與時速下，減少相同的瓦數需要減少多少重量。<br /></h3>
+											<h3>舉例來說，在以時速17.5爬5%坡的情況下想要減少 1 W，大約要降低 5% 風阻或 400 g 重量。<br /></h3>
 										</header>
 										<form name="form" id="form" method=post>
 											<table>
 											  <tr>
-												<td>人的重量(kg)</td>
-												<td><input type="number" name="riderMass"><br></td>
+												<td>風阻面積 CdA(m<sup>2</sup>)</td>
+												<td><input type="number" value="0.3" name="CdA"><br></td>
 											  </tr>
 											  <tr>
-												<td>車子重量(kg)</td>
-												<td><input type="number" name="bikeMass"><br></td>
+												<td>坡度(%)</td>
+												<td><input type="number" value="5" name="slope"><br></td>
 											  </tr>
 											  <tr>
-												<td>裝備重量(kg)</td>
-												<td><input type="number" value="1" name="equipMass"><br></td>
+												<td>時速(km/h)</td>
+												<td><input type="number" value="15" name="speed"><br></td>
 											  </tr>
 											  <tr>
-												<td>預計喝水量(瓶)</td>
-												<td><input type="number" value="2" name="waterMass"><br></td>
+												<td>減少比例(%)</td>
+												<td><input type="number" value="1" name="percent"><br></td>
 											  </tr>
 											  <tr>
-												<td>預計果膠(條)</td>
-												<td><input type="number" value="6" name="foodMass"><br></td>
+												<td><input type="button" value="開始計算" onclick="AtoWCal(this.form)"></td>
 											  </tr>
 											  <tr>
-												<td>目標時間(hh:mm:ss)</td>
-												<td><input type="text" placeholder="例如三小時輸入: 3:00:00" name="time"><br></td>
-											  </tr>
-											  <tr>
-												<td>路段選擇</td>
-												<td>
-												  <select name="route">
-													<option value="0" >西進武嶺</option>
-													<option value="1" >東進武嶺</option>
-													<option value="2" disabled>太平山</option>
-													<option value="3" disabled>梅山36彎</option>
-													<option value="10" >風凸山 Ventoux</option>
-													</select>
-												</td>
-											  <tr>
-												<td><input type="button" value="開始計算" onclick="routeCal(this.form)"></td>
-											  </tr>
-											  <tr>
-												<td>預估做功(kJ)</td>
-												<td><input type="text" name="WORK" readonly></td>
-											  </tr>
-											  <tr>
-												<td>平均功率(W)</td>
-												<td><input type="text" name="Pavg" readonly></td>
-											  </tr>
-											  <tr>
-												<td>計算區間</td>
-												<td><input type="text" name="segment" readonly></td>
-											  </tr>
+												<td>減少等效重量(g)</td>
+												<td><input type="text" name="weight" readonly>
+											  </td>
 											</table>
 										  </form>
 									</div>

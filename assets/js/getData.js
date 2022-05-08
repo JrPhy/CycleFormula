@@ -1,9 +1,5 @@
 Module = {};
-Module.onRuntimeInitialized = function() 
-{
-    return Module._work;
-}
-function Cal(form)
+function routeCal(form)
 {
     const formElement = document.getElementById('form');
     const riderMass = Number(formElement[0].value);
@@ -46,5 +42,22 @@ function Cal(form)
             form.WORK.value = "請輸入正確的數字";
             form.Pavg.value = "請輸入正確的數字";
         }
+    }
+}
+
+function AtoWCal(form)
+{
+    const formElement = document.getElementById('form');
+    const CdA = Number(formElement[0].value);
+    const slope = Number(formElement[1].value);
+    const speed = Number(formElement[2].value);
+    const percent = Number(formElement[3].value);
+    if( CdA < 0 || slope < 0 || speed < 0) {form.weight.value = "請輸入正確的數字";}
+    else
+    {
+        form.weight.value = Module._AtoW(CdA, slope, speed, percent);
+        if (form.weight.value == -2) {form.weight.value = "license 過期了，請聯絡作者";}
+        else if (form.weight.value == -3) {form.weight.value = "license 被修改過，請聯絡作者";}
+        else if (form.weight.value == -1) {form.weight.value = "請輸入正確的數字";}
     }
 }
