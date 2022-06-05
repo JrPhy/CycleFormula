@@ -25,7 +25,7 @@ function routeCal(form)
     }
     else
     {
-        form.WORK.value = Module._work(riderMass, bikeMass, equipMass, water, food, route, timeSeg);
+        form.WORK.value = Module._workClimb(riderMass, bikeMass, equipMass, water, food, route, timeSeg);
         form.Pavg.value = (form.WORK.value*1000/timeSeg).toFixed(1);
         if (form.WORK.value == -2)
         {
