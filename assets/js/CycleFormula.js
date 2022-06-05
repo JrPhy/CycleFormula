@@ -195,7 +195,7 @@ var Module = typeof Module != 'undefined' ? Module : {};
     }
 
     }
-    loadPackage({"files": [{"filename": "/license.asc", "start": 0, "end": 975}], "remote_package_size": 975, "package_uuid": "730dbd44-3127-4d7d-b6a0-a436c74e1fe3"});
+    loadPackage({"files": [{"filename": "/license.asc", "start": 0, "end": 975}], "remote_package_size": 975, "package_uuid": "be256601-7086-4e02-9816-db9957b747a5"});
 
   })();
 
@@ -4792,10 +4792,13 @@ var asm = createWasm();
 var ___wasm_call_ctors = Module["___wasm_call_ctors"] = createExportWrapper("__wasm_call_ctors");
 
 /** @type {function(...*):?} */
-var _work = Module["_work"] = createExportWrapper("work");
+var _workClimb = Module["_workClimb"] = createExportWrapper("workClimb");
 
 /** @type {function(...*):?} */
 var _AtoW = Module["_AtoW"] = createExportWrapper("AtoW");
+
+/** @type {function(...*):?} */
+var _workFlat = Module["_workFlat"] = createExportWrapper("workFlat");
 
 /** @type {function(...*):?} */
 var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");
