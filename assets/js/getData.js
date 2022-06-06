@@ -1,14 +1,14 @@
 Module = {};
 function routeCal(form)
 {
-    const formElement = document.getElementById('form');
-    const riderMass = Number(formElement[0].value);
-    const bikeMass = Number(formElement[1].value);
-    const equipMass = Number(formElement[2].value);
-    const water = Number(formElement[3].value);
-    const food = Number(formElement[4].value);
-    const wantTime = formElement[5].value;
-    const route = Number(formElement[6].value);
+    const forms = document.forms['form'];
+    const riderMass = Number(forms.elements.riderMass.value);
+    const bikeMass = Number(forms.elements.bikeMass.value);
+    const equipMass = Number(forms.elements.equipMass.value);
+    const water = Number(forms.elements.waterMass.value);
+    const food = Number(forms.elements.foodMass.value);
+    const wantTime = forms.elements.time.value;
+    const route = Number(forms.elements.route.value);
     let duration = wantTime.split(':');
     timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
     
@@ -60,4 +60,30 @@ function AtoWCal(form)
         else if (form.weight.value == -3) {form.weight.value = "license 被修改過，請聯絡作者";}
         else if (form.weight.value == -1) {form.weight.value = "請輸入正確的數字";}
     }
+}
+
+function TTCal(form)
+{
+    const forms = document.forms['form'];
+    const riderMass = Number(forms.elements.riderMass.value);
+    const bikeMass = Number(forms.elements.bikeMass.value);
+    const equipMass = Number(forms.elements.equipMass.value);
+    const water = Number(forms.elements.waterMass.value);
+    const food = Number(forms.elements.foodMass.value);
+    const wantTime = forms.elements.time.value;
+    const deep = Number(forms.elements.deep.value);
+    console.log(deep);
+    var inputElements = document.getElementsByClassName('equip');
+    var equip = new Array(3)
+    for (var i = 0; i < inputElements.length; i++)
+    {
+        if (inputElements[i].checked) equip[i] = 1;
+        else equip[i] = 0;
+        console.log(equip[i])
+    }
+
+    const distance = Number(forms.elements.distance.value);
+    console.log(distance);
+    let duration = wantTime.split(':');
+    timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
 }

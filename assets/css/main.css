@@ -78,7 +78,7 @@ html {
   box-sizing: inherit; }
 
 body {
-  background: #ffffff; }
+  background: #111111; }
   body.is-preload *, body.is-preload *:before, body.is-preload *:after, body.is-resizing *, body.is-resizing *:before, body.is-resizing *:after {
     -moz-animation: none !important;
     -webkit-animation: none !important;
@@ -91,7 +91,7 @@ body {
 
 /* Type */
 body, input, select, textarea {
-  color: #7f888f;
+  color: #000000;
   font-family: "Open Sans", sans-serif;
   font-size: 13pt;
   font-weight: 400;
@@ -131,7 +131,7 @@ p {
   margin: 0 0 2em 0; }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #3d4449;
+  color: #dddddd;
   font-family: "Roboto Slab", serif;
   font-weight: 700;
   line-height: 1.5;
@@ -1069,7 +1069,7 @@ select {
   text-overflow: ellipsis; }
   select option {
     color: #3d4449;
-    background: #ffffff; }
+    background: #cccccc; }
   select:focus::-ms-value {
     background-color: transparent; }
   select::-ms-expand {
@@ -1153,6 +1153,11 @@ input[type="checkbox"] + label:before {
 
 input[type="radio"] + label:before {
   border-radius: 100%; }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(0, 0, 0);
+    opacity: 1; /* Firefox */
+  }
 
 ::-webkit-input-placeholder {
   color: #9fa3a6 !important;
@@ -1450,7 +1455,7 @@ table {
     border-left: 0;
     border-right: 0; }
     table tbody tr:nth-child(2n + 1) {
-      background-color: rgba(230, 235, 237, 0.25); }
+      background-color: rgba(230, 235, 237, 0); }
   table td {
     padding: 0.75em 0.75em; }
   table th {
@@ -1928,7 +1933,7 @@ button,
   -webkit-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
   -ms-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
   transition: margin-left 0.5s ease, box-shadow 0.5s ease;
-  background-color: #f5f6f7;
+  background-color: #111111;
   font-size: 0.9em;
   position: relative;
   width: 26em; }
@@ -1949,7 +1954,7 @@ button,
         margin-bottom: 0;
         padding-bottom: 0; }
     #sidebar > .inner > .alt {
-      background-color: #eff1f2;
+      background-color: #111111;
       border-bottom: 0;
       margin: -2.22222em 0 4.44444em -2.22222em;
       padding: 2.22222em;
@@ -2273,11 +2278,11 @@ button,
     padding-top: 0; }
 
 /* mode */
-@media (prefers-color-scheme: dark) {
+/*@media (prefers-color-scheme: dark) {
   html, img { 
       filter: invert(1) hue-rotate(180deg);
   }
   .some-ele {
       box-shadow: none;
   }
-}
+}*/
