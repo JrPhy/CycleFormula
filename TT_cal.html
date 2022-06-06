@@ -50,7 +50,7 @@
 								<section id="banner">
 									<div class="content">
 										<header>
-											<h1>路段做功計算機<br /></h1>
+											<h1>個人計時做功計算機<br /></h1>
 											<h3>輸入以下數據來估算某一路段的做功<br /></h3>
 											<h3><font color="red">對標 power tap p1 雙邊數據</font><br /></h3>
 											<h3>為預估<font color="red"></font>無風，個人計時</font>的做功，可當作練車時的目標<br /></h3>
@@ -72,23 +72,53 @@
 												<td>預計果膠(條) <input type="number" value="6" name="foodMass"><br></td>
 											  </tr>
 											  <tr>
-												<td>目標時間(hh:mm:ss) <input type="text" value = "3:00:00" placeholder="例如三小時輸入: 3:00:00" name="time" style="color:#000000"><br></td>
-												<td>路段選擇 <select name="route" style="color:#000000">
-													<option value="0" >西進武嶺</option>
-													<option value="1" >東進武嶺</option>
-													<option value="2" disabled>太平山</option>
-													<option value="3" disabled>梅山36彎</option>
-													<option value="10" >風凸山 Ventoux</option>
+												<td>車種
+													<input type="radio" id="Normal" name="bike" value="0">
+													<label for="Normal">爬坡車</label>
+												
+													<input type="radio" id="Aero" name="bike" value="1" checked>
+													<label for="Aero">空力車</label>
+												
+													<input type="radio" id="TT" name="bike" value="2">
+													<label for="TT">計時車</label>
+												  <br></td>
+												<td>裝備
+													<input class="equip" type="checkbox" id="HandleBar"  value="1" />
+													<label for="HandleBar">計時把</label>
+
+													<input class="equip" type="checkbox" id="Helmet"  value="1" />
+													<label for="Helmet">空力帽</label>
+
+													<input class="equip" type="checkbox" id="Suit"  value="1" />
+													<label for="Suit">連身衣</label>
+												  <br></td>
+											  </tr>
+											  <tr>
+												<td>輪框框高 <select name="deep" style="color:#000000">
+													<option value="0" >25 mm</option>
+													<option value="1" >45 mm</option>
+													<option value="2" >65 mm</option>
+													<option value="3" >三刀輪</option>
+													<option value="4" >碟輪</option>
 													</select>
 												<br></td>
+												<td>計時距離
+												  <select name="distance" style="color:#000000">
+													<option value="0" >16.1</option>
+													<option value="1" >20</option>
+													<option value="2" >40</option>
+													<option value="3" disabled>80</option>
+													<option value="4" disabled>160</option>
+													<option value="5" disabled>雙塔</option>
+													</select>
+												</td>
 											  </tr>
 											  <tr>
-												<td><br><input type="button" value="開始計算" onclick="routeCal(this.form)"><br></td>
-												<td>計算區間 <input type="text" name="segment" readonly style="color:#000000"><br></td>
+												<td><input type="button" value="開始計算" onclick="TTCal(this.form)"></td>
 											  </tr>
 											  <tr>
-												<td>預估做功(kJ) <input type="text" name="WORK" readonly style="color:#000000"><br></td>
-												<td>平均功率(W) <input type="text" name="Pavg" readonly style="color:#000000"><br></td>
+												<td>預估做功(kJ) <input type="text" name="WORK" readonly style="color:#000000"></td>
+												<td>平均功率( W) <input type="text" name="Pavg" readonly style="color:#000000"></td>
 											  </tr>
 											</table>
 										  </form>
