@@ -1068,8 +1068,8 @@ select {
   padding-right: 2.75em;
   text-overflow: ellipsis; }
   select option {
-    color: #3d4449;
-    background: #cccccc; }
+    color: #000000;
+    background: #ffffff; }
   select:focus::-ms-value {
     background-color: transparent; }
   select::-ms-expand {
