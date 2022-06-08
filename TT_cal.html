@@ -31,7 +31,6 @@
 	</head>
 
 	<body class="is-preload">
-
 		<!-- Wrapper -->
 			<div id="wrapper">
 
@@ -59,6 +58,14 @@
 											<h3>水壺以一瓶 600 mL，果膠以一條 60 g 來做計算<br /></h3>
 										</header>
 										<form name="form" id="form" method=post>
+											<script>
+											function TTBike() {
+												document.getElementById("HandleBar").checked = true;
+												document.getElementById("Helmet").checked = true;
+												document.getElementById("Suit").checked = true;
+												document.getElementById("TTP").checked = true;
+											}
+											</script>
 											<table style="color:#aaaaaa">
 											  <tr>
 												<td>人的重量(kg) <input type="number" value="70" name="riderMass"><br></td>
@@ -73,13 +80,13 @@
 											  </tr>
 											  <tr>
 												<td>車種
-													<input type="radio" id="Normal" name="bike" value="0">
+													<input type="radio" name="bike" id="Normal" value="0">
 													<label for="Normal">爬坡車</label>
 												
-													<input type="radio" id="Aero" name="bike" value="1" checked>
+													<input type="radio" name="bike" id="Aero" value="1" checked>
 													<label for="Aero">空力車</label>
 												
-													<input type="radio" id="TT" name="bike" value="2">
+													<input type="radio" name="bike" id="TT" value="2" onclick="TTBike();">
 													<label for="TT">計時車</label>
 												  <br></td>
 												<td>裝備
@@ -115,6 +122,16 @@
 											  </tr>
 											  <tr>
 												<td><input type="button" value="開始計算" onclick="TTCal(this.form)"></td>
+												<td>騎姿
+													<input type="radio" name="pose" id="UPP" value="0">
+													<label for="UPP">一般</label>
+												
+													<input type="radio" name="pose" id="DPP" value="1" checked>
+													<label for="DPP">空力</label>
+												
+													<input type="radio" name="pose" id="TTP" value="2" onclick="TTBike();">
+													<label for="TTP">計時</label>
+												  <br></td>
 											  </tr>
 											  <tr>
 												<td>預估做功(kJ) <input type="text" name="WORK" readonly style="color:#000000"></td>
