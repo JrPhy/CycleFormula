@@ -24,6 +24,8 @@
 		<meta property="og:url" content="https://jrphy.github.io/CycleFormula/" />
 		<meta property="og:image:secure_url" content="https://github.com/JrPhy/CycleFormula/blob/main/images/Cycle_Formula.jpg" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    	<meta name="referrer" content="no-referrer-when-downgrade">
 	</head>
 	<head>
 		<script src="assets/js/getData.js"></script>
@@ -64,6 +66,9 @@
 												document.getElementById("Helmet").checked = true;
 												document.getElementById("Suit").checked = true;
 												document.getElementById("TTP").checked = true;
+											}
+											function position(pose) {
+												document.getElementById("img_pose").src = "images/"+pose+".jpg";
 											}
 											</script>
 											<table style="color:#aaaaaa">
@@ -124,13 +129,13 @@
 											  <tr>
 												<td><input type="button" value="開始計算" onclick="TTCal(this.form)"></td>
 												<td>騎姿
-													<input type="radio" name="pose" id="UPP" value="0">
+													<input type="radio" name="pose" id="UPP" value="0" onclick="position('UPP');">
 													<label for="UPP">一般</label>
 												
-													<input type="radio" name="pose" id="DPP" value="1" checked>
+													<input type="radio" name="pose" id="DPP" value="1" checked onclick="position('DPP');">
 													<label for="DPP">空力</label>
 												
-													<input type="radio" name="pose" id="TTP" value="2" onclick="TTBike();">
+													<input type="radio" name="pose" id="TTP" value="2" onclick="TTBike();position('TPP');">
 													<label for="TTP">計時</label>
 												  <br></td>
 											  </tr>
@@ -138,12 +143,36 @@
 												<td>預估做功(kJ) <input type="text" name="WORK" readonly style="color:#000000"></td>
 												<td>平均功率( W) <input type="text" name="Pavg" readonly style="color:#000000"></td>
 											  </tr>
+											  <tr>
+												<th>網站名稱</th>
+												<th>七月訪客數(萬)<br></th>
+												<th>八月訪客數(萬)</th>
+											  </tr>
+											  <tr>
+												<td>萌芽綜合天地<br></td>
+												<td>2<br></td>
+												<td rowspan="3"><br><br>2 (rowspan="2")<br></td>
+											  </tr>
+											  <tr>
+												<td>萌芽悠遊網<br>
+												</td>
+												<td>1<br>
+												</td>
+											  </tr>
+											  <tr>
+												<td>萌芽悠遊網<br></td>
+												<td>1<br></td>
+											  </tr>
 											</table>
+											<td><img id="img_pose" src="images/DPP.jpg"></tr>
 										  </form>
 									</div>
 								</section>  
 								<p style="color:#aaaaaa">License 時間 2022年9月30日 23:59:59 GMT+08:00</p>
 								<p class="copyright" style="color:#aaaaaa">&copy; 內容與算法: 單車新幹線 Cycle Formula</p>
+								<div class="post__meta meta">
+									<span id="busuanzi_container_page_pv" style="color:#aaaaaa">　觀看數：<span id="busuanzi_value_page_pv"></span></span>
+								</div>
 						</div>
 					</div>
 
