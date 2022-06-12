@@ -18,6 +18,8 @@ function routeCal(form)
     {form.segment.value = "放行點 - 武嶺牌樓"}
     else if(route == 10)
     {form.segment.value = "Bedoin - Top"}
+    else if(route == 11)
+    {form.segment.value = "北麓公園 - 五合目"}
     if( riderMass < 1 || bikeMass < 1 || equipMass < 0 || water < 0 || food < 0 || timeSeg < 1)
     {
         form.WORK.value = "請輸入正確的數字";
