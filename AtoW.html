@@ -59,27 +59,17 @@
 										<form name="form" id="form" method=post>
 											<table style="color:#aaaaaa">
 											  <tr>
-												<td>風阻面積 CdA(m<sup>2</sup>)</td>
-												<td><input type="number" value="0.3" name="CdA"><br></td>
+												<td>風阻面積 CdA(m<sup>2</sup>) <input type="number" value="0.3" name="CdA"><br/></td>
+												<td>坡度(%) ........<input type="number" value="5" name="slope"><br/></td>
 											  </tr>
 											  <tr>
-												<td>坡度(%)</td>
-												<td><input type="number" value="5" name="slope"><br></td>
+												<td>時速 (km/h) ...........<input type="number" value="15" name="speed"><br/></td>
+												<td>減少比例(%) <input type="number" value="1" name="percent"><br/></td>
 											  </tr>
 											  <tr>
-												<td>時速(km/h)</td>
-												<td><input type="number" value="15" name="speed"><br></td>
+												<td><input type="button" value="開始計算" onclick="AtoWCal(this.form)"><br/></td>
+												<td>減少重量(g) <input type="text" name="weight" readonly style="color:#000000"><br/></td>
 											  </tr>
-											  <tr>
-												<td>減少比例(%)</td>
-												<td><input type="number" value="1" name="percent"><br></td>
-											  </tr>
-											  <tr>
-												<td><input type="button" value="開始計算" onclick="AtoWCal(this.form)"></td>
-											  </tr>
-											  <tr>
-												<td>減少等效重量(g)</td>
-												<td><input type="text" name="weight" readonly style="color:#000000">
 											  </td>
 											</table>
 										  </form>
