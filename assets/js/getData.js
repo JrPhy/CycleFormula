@@ -7,8 +7,8 @@ function routeCal(form)
     const equipMass = Number(forms.elements.equipMass.value);
     const water = Number(forms.elements.waterMass.value);
     const food = Number(forms.elements.foodMass.value);
-    const wantTime = forms.elements.time.value;
     const route = Number(forms.elements.route.value);
+    const wantTime = forms.elements.time.value;
     let duration = wantTime.split(':');
     timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
     
@@ -72,20 +72,49 @@ function TTCal(form)
     const equipMass = Number(forms.elements.equipMass.value);
     const water = Number(forms.elements.waterMass.value);
     const food = Number(forms.elements.foodMass.value);
-    const wantTime = forms.elements.time.value;
     const deep = Number(forms.elements.deep.value);
-    console.log(deep);
+    const bike = Number(forms.elements.bike.value);
+    const pose = Number(forms.elements.pose.value);
+    const Helmet = Number(forms.elements.Helmet.value);
+    const route = Number(forms.elements.route.value);
+    const windSpeed = Number(forms.elements.windSpeed.value);
+    const wantTime = forms.elements.time.value;
+    let duration = wantTime.split(':');
+    
+    timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
+
     var inputElements = document.getElementsByClassName('equip');
     var equip = new Array(3)
     for (var i = 0; i < inputElements.length; i++)
     {
         if (inputElements[i].checked) equip[i] = 1;
         else equip[i] = 0;
-        console.log(equip[i])
     }
-
-    const distance = Number(forms.elements.distance.value);
-    console.log(distance);
-    let duration = wantTime.split(':');
-    timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
+    if( riderMass < 1 || bikeMass < 1 || equipMass < 0 || water < 0 || food < 0 || timeSeg < 1)
+    {
+        form.WORK.value = "請輸入正確的數字";
+        form.Pavg.value = "請輸入正確的數字";
+    }
+    else
+    {
+        form.WORK.value = Module._workFlat(riderMass, bikeMass, equipMass, water, food, route, timeSeg,
+                                            bike, pose, deep, Helmet, equip[0], equip[1], equip[2], windSpeed);
+        form.Pavg.value = (form.WORK.value*1000/timeSeg).toFixed(1);
+        console.log(form.WORK.value)
+        if (form.WORK.value == -2)
+        {
+            form.WORK.value = "license 過期了";
+            form.Pavg.value = "請聯絡作者";
+        }
+        else if (form.WORK.value == -3)
+        {
+            form.WORK.value = "license 被修改過";
+            form.Pavg.value = "請聯絡作者";
+        }
+        else if(form.WORK.value == -1 || isNaN(form.Pavg.value))
+        {
+            form.WORK.value = "請輸入正確的數字";
+            form.Pavg.value = "請輸入正確的數字";
+        }
+    }
 }

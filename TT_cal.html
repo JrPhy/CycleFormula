@@ -51,40 +51,50 @@
 								<section id="banner">
 									<div class="content">
 										<header>
-											<h1>個人計時做功計算機 (未完成敬請期待)<br /></h1>
-											<h3>輸入以下數據來估算某一路段的做功<br /></h3>
-											<h3><font color="red">對標 power tap p1 雙邊數據</font><br /></h3>
-											<h3>為預估<font color="red"></font>無風，個人計時</font>的做功，可當作練車時的目標<br /></h3>
-											<h3>實際騎乘會有些許誤差，例如風向，是否跟車輪車等<br /></h3>
+											<h1>平路做功計算機<br /></h1>
+											<h3>輸入以下數據來估算平路路段的做功<br /></h3>
+											<h3><font color="red">對標 power tap p1 雙邊數據</font>，可當作練車時的目標<br /></h3>
+											<h3>實際騎乘會有些許誤差，例如姿勢的保持，溫度濕度，是否跟車輪車等<br /></h3>
+											<h3>輪組目前沒分前後輪，所以選碟輪是預設前後輪都是碟輪<br /></h3>
 											<h3>裝備重包含人身部品，如：安全帽+卡鞋+手套，約一公斤<br /></h3>
 											<h3>水壺以一瓶 600 mL，果膠以一條 60 g 來做計算<br /></h3>
+											<h3>有任何問題請私訊粉絲專頁<br /></h3>
 										</header>
 										<form name="form" id="form" method=post>
 											<script>
-											function TTBike() {
+											function TTBike() 
+											{
 												document.getElementById("HandleBar").checked = true;
-												document.getElementById("Helmet").checked = true;
 												document.getElementById("Suit").checked = true;
+												document.getElementById("ShoeCover").checked = true;
+												document.getElementById("TTHelmet").checked = true;
 												document.getElementById("TTP").checked = true;
+												document.querySelector('#deep [value="' + '4' + '"]').selected = true;
 											}
-											function position(pose) {
+											function setSelectValue (id, val) 
+											{
+												document.getElementById(id).value = val;
+											}
+											/*function position(pose) 
+											{
 												document.getElementById("img_pose").src = "images/"+pose+".jpg";
-											}
+											}*/
 											</script>
 											<table style="color:#aaaaaa">
 											  <tr>
 												<td>人的重量(kg) <input type="number" value="70" name="riderMass"><br></td>
-												<td>車子重量(kg) <input type="number" value="7" name="bikeMass"><br></td>
+												<td>車子重量(kg...) <input type="number" value="7" name="bikeMass"><br></td>
 											  </tr>
 											  <tr>
 												<td>裝備重量(kg) <input type="number" value="1" name="equipMass"><br></td>
+												<td>風向風速(m/s) <input type="number" value="0" name="windSpeed"><br></td>
 											  </tr>
 											  <tr>
-												<td>預計水量(瓶) <input type="number" value="2" name="waterMass"><br></td>
-												<td>預計果膠(條) <input type="number" value="6" name="foodMass"><br></td>
+												<td>預計水量(瓶) <input type="number" value="1" name="waterMass"><br></td>
+												<td>預計果膠(條...) <input type="number" value="0" name="foodMass"><br></td>
 											  </tr>
 											  <tr>
-												<td>車種
+												<td>車種------------
 													<input type="radio" name="bike" id="Normal" value="0">
 													<label for="Normal">爬坡車</label>
 												
@@ -94,57 +104,82 @@
 													<input type="radio" name="bike" id="TT" value="2" onclick="TTBike();">
 													<label for="TT">計時車</label>
 												  <br></td>
-												<td>裝備
+												<td>裝備------------
 													<input class="equip" type="checkbox" id="HandleBar"  value="1" />
 													<label for="HandleBar">計時把</label>
-
-													<input class="equip" type="checkbox" id="Helmet"  value="1" />
-													<label for="Helmet">空力帽</label>
-
+													
 													<input class="equip" type="checkbox" id="Suit"  value="1" />
 													<label for="Suit">連身衣</label>
+													
+													<input class="equip" type="checkbox" id="ShoeCover"  value="1" />
+													<label for="ShoeCover">空力鞋套</label>
 												  <br></td>
 											  </tr>
 											  <tr>
-												<td>輪框框高 
-												  <select name="deep" style="color:#000000">
-													<option value="0" >25 mm</option>
-													<option value="1" >45 mm</option>
-													<option value="2" >65 mm</option>
-													<option value="3" >三刀輪</option>
-													<option value="4" >碟輪</option>
-													</select>
-												<br></td>
-												<td>計時距離 km
-												  <select name="distance" style="color:#000000">
-													<option value="0" >16.1</option>
-													<option value="1" >20</option>
-													<option value="2" >40</option>
-													<option value="3" disabled>80</option>
-													<option value="4" disabled>160</option>
-													<option value="5" disabled>雙塔</option>
-													</select>
-												</td>
-											  </tr>
-											  <tr>
-												<td><input type="button" value="開始計算" onclick="TTCal(this.form)"></td>
-												<td>騎姿
-													<input type="radio" name="pose" id="UPP" value="0" onclick="position('UPP');">
+												<td>帽子------------
+													<input type="radio" name="Helmet" id="NormalHelmet" value="0">
+													<label for="NormalHelmet">一般帽</label>
+												
+													<input type="radio" name="Helmet" id="AeroHelmet" value="1" checked>
+													<label for="AeroHelmet">空力帽</label>
+												
+													<input type="radio" name="Helmet" id="TTHelmet" value="2">
+													<label for="TTHelmet">計時帽</label>
+												  <br></td>
+												<td>騎姿------------
+													<input type="radio" name="pose" id="UPP" value="0">
+													<label for="UPP">一般</label>
+												
+													<input type="radio" name="pose" id="DPP" value="1" checked>
+													<label for="DPP">空力</label>
+												
+													<input type="radio" name="pose" id="TTP" value="2">
+													<label for="TTP">計時</label>
+													<!--<input type="radio" name="pose" id="UPP" value="0" onclick="position('UPP');">
 													<label for="UPP">一般</label>
 												
 													<input type="radio" name="pose" id="DPP" value="1" checked onclick="position('DPP');">
 													<label for="DPP">空力</label>
 												
-													<input type="radio" name="pose" id="TTP" value="2" onclick="TTBike();position('TPP');">
-													<label for="TTP">計時</label>
-												  <br></td>
+													<input type="radio" name="pose" id="TTP" value="2" onclick="position('TPP');">
+													<label for="TTP">計時</label>-->
+												  </td>
+											  </tr>
+											  <tr>
+												<td>輪框框高 
+												  <select name="deep" id="deep" style="color:#000000">
+													<option value="0" >25 mm</option>
+													<option value="1" selected>45 mm</option>
+													<option value="2" >65 mm</option>
+													<option value="3" >三刀輪</option>
+													<option value="4" >碟輪</option>
+													</select>
+												<br></td>
+												<td>距離選擇 <select name="route" style="color:#000000">
+													<option value="8" >8 km</option>
+													<option value="10" >10 km</option>
+													<option value="16" >16 km</option>
+													<option value="20" selected>20 km</option>
+													<option value="40" >40 km</option>
+													<option value="45" >45 km</option>
+													<option value="90" >90 km</option>
+													<option value="520" disabled>一日雙塔</option>
+													</select>
+												<br></td>
+											  </tr>
+											  <tr>
+												<td>目標時間(hh:mm:ss) <input type="text" value = "0:30:00" name="time" style="color:#000000"><br></td>
+												<td>跟車時間(hh:mm:ss) <input type="text" value = "1:00:00" name="draftTime" disabled><br></td>
+											  </tr>
+											  <tr>
+												<td><input type="button" value="開始計算" onclick="TTCal(this.form)"></td>
+												
 											  </tr>
 											  <tr>
 												<td>預估做功(kJ) <input type="text" name="WORK" readonly style="color:#000000"></td>
 												<td>平均功率( W) <input type="text" name="Pavg" readonly style="color:#000000"></td>
 											  </tr>
 											</table>
-											<td><img id="img_pose" src="images/DPP.jpg"></tr>
 										  </form>
 									</div>
 								</section>  
@@ -174,8 +209,8 @@
                           </header>
                           <ul>
                             <li><a href="index.html"><h3>首頁</h3></a></li>
-                            <li><a href="route_cal.html"><h3>路段做功計算機</h3></a></li>
-							<li><a href="TT_cal.html"><h3>個人計時做功計算機</h3></a></li>
+                            <li><a href="route_cal.html"><h3>爬坡做功計算機</h3></a></li>
+							<li><a href="TT_cal.html"><h3>平路做功計算機</h3></a></li>
 							<li><a href="AtoW.html"><h3>風阻轉重量計算機</h3></a></li>
                             <li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3>騎乘技巧的理論分析</h3></a></li>
                             <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3>粉絲專頁</h3></a></li>
