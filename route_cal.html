@@ -16,7 +16,7 @@
 		gtag('config', 'G-FZLKEEEQYS');
 		</script>
 		<title>單車新幹線Cycle Formula</title>
-		<meta charset="utf-8" />
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-type' />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="用理論計算來分析單車運動，路段做功計算機幫助你計算爬武嶺的目標做功與均瓦" />
 		<meta property="og:type" content="website" />
@@ -30,6 +30,13 @@
 	<head>
 		<script src="assets/js/getData.js"></script>
 		<script src="assets/js/CycleFormula.js"></script>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/langSwitcher.js"></script>
+		<script>
+			$(document).ready(function(){
+				$.MultiLanguage('assets/js/language.json');
+			})
+		</script>
 	</head>
 
 	<body class="is-preload">
@@ -46,11 +53,27 @@
 										<li><a href="https://www.facebook.com/CycleFormula" class="icon brands fa-facebook-f" Target="_blank" style="color:rgb(0, 140, 255)"><span class="label">Facebook</span></a></li>
                                         <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" class="icon brands fa-youtube" Target="_blank" style="color:red"><span class="label">Youtube</span></a></li>
                                     </ul>
+									
 								</header>
 							<!-- Banner -->
 								<section id="banner">
 									<div class="content">
 										<header>
+											<!--<h1 id="ml-pluginName"></h1>
+											<p>
+												<h3 id="ml-demo"> </h3>
+												<button onclick="$.MultiLanguage('assets/js/language.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+												<button onclick="$.MultiLanguage('assets/js/language.json', 'en')" class="btn">English</button>
+											</p>
+											<p>
+												<h3 id="ml-howToUse"> </h3>
+												<div><code>$.MultiLanguage('language.json', 'zh-tw') <span id="ml-defaultLangCode"> </span></code></div>
+												<div><code>$.MultiLanguage('language.json', 'en') <span id="ml-enLangCode"> </span></code></div>
+											</p>
+											<p style="color:#aaaaaa" id="ml-msg1"></p>
+											<p style="color:#aaaaaa" class="ml-classA"></p>
+											<p style="color:#aaaaaa" id="ml-msg2"></p>
+											<p style="color:#aaaaaa" class="ml-classA"></p>-->
 											<h1>路段做功計算機<br /></h1>
 											<h3>輸入以下數據來估算某一路段的做功<br /></h3>
 											<h3><font color="red">對標 power tap p1 雙邊數據</font><br /></h3>
@@ -58,6 +81,7 @@
 											<h3>實際騎乘會有些許誤差，例如風向，是否跟車輪車等<br /></h3>
 											<h3>裝備重包含人身部品，如：安全帽+卡鞋+手套，約一公斤<br /></h3>
 											<h3>水壺以一瓶 600 mL，果膠以一條 60 g 來做計算<br /></h3>
+											<h3>有任何問題請私訊粉絲專頁<br /></h3>
 										</header>
 										<form name="form" id="form" method=post>
 											<table style="color:#aaaaaa">
@@ -67,7 +91,7 @@
 											  </tr>
 											  <tr>
 												<td>裝備重量(kg) <input type="number" value="1" name="equipMass"><br></td>
-												<td>跟車時間(% ) <input type="number" value="40/60" name="draftTime"><br></td>
+												<td>跟車時間(% ) <input type="number" value="尚未開放" name="draftTime" disabled><br></td>
 											  </tr>
 											  <tr>
 												<td>預計水量(瓶) <input type="number" value="2" name="waterMass"><br></td>
@@ -123,8 +147,8 @@
                           </header>
                           <ul>
                             <li><a href="index.html"><h3>首頁</h3></a></li>
-                            <li><a href="route_cal.html"><h3>路段做功計算機</h3></a></li>
-							<li><a href="TT_cal.html"><h3>個人計時做功計算機</h3></a></li>
+                            <li><a href="route_cal.html"><h3>爬坡做功計算機</h3></a></li>
+                  			<li><a href="TT_cal.html"><h3>平路做功計算機</h3></a></li>
 							<li><a href="AtoW.html"><h3>風阻轉重量計算機</h3></a></li>
                             <li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3>騎乘技巧的理論分析</h3></a></li>
                             <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3>粉絲專頁</h3></a></li>
@@ -141,11 +165,9 @@
               </div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
 	</body>
 </html>
