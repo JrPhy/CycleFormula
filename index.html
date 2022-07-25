@@ -28,6 +28,15 @@
       <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     	<meta name="referrer" content="no-referrer-when-downgrade">
 	  </head>
+    <head>
+      <script src="assets/js/jquery.min.js"></script>
+      <script src="assets/js/langSwitcher.js"></script>
+      <script>
+        $(document).ready(function(){
+          $.MultiLanguage('assets/js/index.json');
+        })
+      </script>
+    </head>
     <body class="is-preload">
       <!-- Wrapper -->
         <div id="wrapper">
@@ -46,12 +55,12 @@
                 <!-- Banner -->
                     <section id="banner">
                     <div class="content">
+                      <p>
+                        <button onclick="$.MultiLanguage('assets/js/index.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+                        <button onclick="$.MultiLanguage('assets/js/index.json', 'en')" class="btn">English</button>
+                      </p>
                       <header>
-                        <h1>歡迎來到<br />
-                        單車新幹線</h1>
-                        <h3>用理論計算來分析單車運動</h3>
-                        <h3>有任何問題與建議可藉由粉絲專頁</h3>
-                        <h3>文章與知識分享請參考騎乘技巧的理論分析</h3>
+                        <h2 id="welcome"></h2>
                       </header>
                     </div>
                     <span class="image object">
@@ -59,8 +68,8 @@
                     </span>
                   </section>
                   <div class="post__meta meta">
-                      <span id="busuanzi_container_page_pv" style="color:#aaaaaa">　觀看數：<span id="busuanzi_value_page_pv"></span></span>
-                    </div>
+                    <span id="busuanzi_container_page_pv" style="color:#aaaaaa"><h5 id="view"></h5><span id="busuanzi_value_page_pv"></span></span>
+                  </div>
               </div>
             </div>
   
@@ -78,17 +87,17 @@
             <!-- Menu -->
               <nav id="menu">
                 <header class="major">
-                  <h2>選單</h2>
+                  <h2 id="menu_page"></h2>
                 </header>
                 <ul>
-                  <li><a href="index.html"><h3>首頁</h3></a></li>
-                  <li><a href="route_cal.html"><h3>爬坡做功計算機</h3></a></li>
-                  <li><a href="TT_cal.html"><h3>平路做功計算機</h3></a></li>
-                  <li><a href="AtoW.html"><h3>風阻轉重量計算機</h3></a></li>
-                  <li><a href="AtoW.html"><h3>風阻轉重量計算機</h3></a></li>
-                  <li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3>騎乘技巧的理論分析</h3></a></li>
-                  <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3>粉絲專頁</h3></a></li>
-                  <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3>頻道影片</h3></a></li>
+                  <li><a href="index.html"><h3 id="index"></h3></a></li>
+                  <li><a href="route_cal.html"><h3 id="routeCal_page"></h3></a></li>
+                  <li><a href="TT_cal.html"><h3 id="TTCal_page"></h3></a></li>
+                  <li><a href="AtoW.html"><h3 id="AtoW_page"></h3></a></li>
+                  <li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3 id="blog"></h3></a></li>
+                  <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3 id="Facebook"></h3></a></li>
+                  <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3 id="Youtube"></h3></a></li>
+                  <li><a href="release_note.html"><h3 id="release_page"></h3></a></li>
                 </ul>
               </nav>
             <!-- Footer -->
@@ -101,7 +110,6 @@
     </div>
   
       <!-- Scripts -->
-        <script src="assets/js/jquery.min.js"></script>
         <script src="assets/js/browser.min.js"></script>
         <script src="assets/js/breakpoints.min.js"></script>
         <script src="assets/js/util.js"></script>

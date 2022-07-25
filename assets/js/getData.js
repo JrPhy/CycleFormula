@@ -75,7 +75,7 @@ function TTCal(form)
     const deep = Number(forms.elements.deep.value);
     const bike = Number(forms.elements.bike.value);
     const pose = Number(forms.elements.pose.value);
-    const Helmet = Number(forms.elements.Helmet.value);
+    const Helmet = Number(forms.elements.helmet.value);
     const route = Number(forms.elements.route.value);
     const windSpeed = Number(forms.elements.windSpeed.value);
     const wantTime = forms.elements.time.value;

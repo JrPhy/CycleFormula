@@ -1,0 +1,41 @@
+{
+    "config": {
+      "default": "zh-tw"
+    },
+    "language": {
+      "zh-tw": {
+        "#index": "首頁",
+        "#menu_page": "選單",
+        "#routeCal_page": "爬坡做功計算機",
+        "#TTCal_page": "平路做功計算機",
+        "#AtoW_page": "風阻轉重量計算機",
+        "#blog": "騎乘技巧的理論分析",
+        "#Facebook": "粉絲專頁",
+        "#Youtube": "頻道頁面",
+        "#release_page": "版本紀錄",
+        "#welcome": ["歡迎來到單車新幹線<br /> ",
+        "用理論計算來分析單車運動<br />",
+        "有任何問題與建議可洽粉絲專頁<br />",
+        "文章知識分享請參考騎乘技巧的理論分析<br />",
+        "計算影片請洽個人頻道<br />"],
+        "#view": "觀看數"
+      },
+      "en": {
+        "#index": "Index",
+        "#menu_page": "Menu",
+        "#routeCal_page": "Climb Work Calculator",
+        "#TTCal_page": "Flat Work Calculator",
+        "#AtoW_page": "Aero to Weight Calculator",
+        "#blog": "Theotical artical",
+        "#Facebook": "Facebook",
+        "#Youtube": "Youtube",
+        "#release_page": "Release Note",
+        "#welcome": ["Welcome to Cycle Formula<br />",
+        "Analyze riding theoritically.<br />",
+        "Contact me by Facebook if you have any Recommendation or problem.<br /><br />",
+        "Articles and knowldge are in the Theotical artical.<br />",
+        "Theotical calculation is in the Youtube.<br />"],
+        "#view": "View"
+      }
+    }
+  }
