@@ -1,0 +1,61 @@
+{
+    "config": {
+      "default": "zh-tw"
+    },
+    "language": {
+      "zh-tw": {
+        "#title_AtoW": "風阻轉重量計算機 // 單車新幹線 Cycle Formula",
+        "#index": "首頁",
+        "#AtoW": "平路做功計算機",
+        "#routeCal_page": "爬坡做功計算機",
+        "#TTCal_page": "平路做功計算機",
+        "#AtoW_page": "風阻轉重量計算機",
+        "#blog": "騎乘技巧的理論分析",
+        "#Facebook": "粉絲專頁",
+        "#Youtube": "頻道頁面",
+        "#release_page": "版本紀錄",
+        "#AtoWHowToUse": ["在爬坡度多少的坡，以時速多少前進時<br /> ",
+        "減少的風阻面積可以省下多少瓦數<br /> ",
+        "接著在相同的坡度與時速下<br />",
+        "減少相同的瓦數需要減少多少重量<br />",
+        "舉例來說，在以時速 17.5 爬 5% 坡時<br />",
+        "想要減少 1 W，大約要降低 5% 風阻或 400 g 重量<br />",
+        "有任何問題請私訊粉絲專頁<br />"],
+        "#CdA": "風阻面積 CdA(m<sup>2</sup>)",
+        "#slope": "坡度 (%)",
+        "#speed": "時速 (km/h)",
+        "#percent": "減少比例 (%)",
+        "#weight": "等效減少重量 (g)",
+        "#license": "License 時間 2022年9月30日 23:59:59 GMT+08:00",
+        "#copyright": "內容與算法: 單車新幹線 Cycle Formula",
+        "#view": "觀看數"
+      },
+      "en": {
+        "#title_AtoW": "Aero to Weight Calculator // 單車新幹線 Cycle Formula",
+        "#index": "Index",
+        "#AtoW": "Aero to Weight Calculator",
+        "#routeCal_page": "Climb Work Calculator",
+        "#TTCal_page": "Flat Work Calculator",
+        "#AtoW_page": "Aero to Weight Calculator",
+        "#blog": "Theotical artical",
+        "#Facebook": "Facebook",
+        "#Youtube": "Youtube",
+        "#release_page": "Release Note",
+        "#AtoWHowToUse": ["At specific slope and speed<br /> ",
+        "how many watt can be save by reducing drag area<br /> ",
+        "then at the same slope and speed, <br />",
+        "how many weight you need to reduce to save same watt.<br />",
+        "For example，at 17.5 kph and 5% slope<br />",
+        "saving 1 W needs to reduce 5% drag area or 400 g <br />",
+        "PM my Facebook if you have any problem<br /></h3>"],
+        "#CdA": "Drag Area CdA(m<sup>2</sup>)",
+        "#slope": "Slope ( %)",
+        "#speed": "Speed (km/h)",
+        "#percent": "Percent (%)",
+        "#weight": "Equivalent Weight (g)",
+        "#license": "License expire 2022/9/30 23:59:59 GMT+08:00",
+        "#copyright": "Content and algorithm: 單車新幹線 Cycle Formula",
+        "#view": "View"
+      }
+    }
+  }

@@ -1,0 +1,55 @@
+{
+    "config": {
+      "default": "zh-tw"
+    },
+    "language": {
+      "zh-tw": {
+        "#title_release": "版本紀錄 // 單車新幹線 Cycle Formula",
+        "#release_note": "版本紀錄",
+        "#1_0_0": "1.0.0 爬坡路段計算機",
+        "#1_0_1": "1.0.1 爬坡路段錯誤修復",
+        "#1_1_0": "1.1.0 風阻轉重量計算機",
+        "#1_2_0": "1.2.0 平路做功計算機",
+        "#1_2_1": "1.2.1 風阻轉重量錯誤修復",
+        "#1_3_0": "1.3.0 加入英文語系",
+
+        "#license": "License 時間 2022年9月30日 23:59:59 GMT+08:00",
+        "#copyright": "內容與算法: 單車新幹線 Cycle Formula",
+        "#view": "觀看數",
+ 
+        "#menu_page": "選單",
+        "#index": "首頁",
+        "#routeCal_page": "爬坡做功計算機",
+        "#TTCal_page": "平路做功計算機",
+        "#AtoW_page": "風阻轉重量計算機",
+        "#blog": "騎乘技巧的理論分析",
+        "#Facebook": "粉絲專頁",
+        "#Youtube": "頻道頁面",
+        "#release_page": "版本紀錄"
+     },
+      "en": {
+        "#title_release": "Release Note // 單車新幹線 Cycle Formula",
+        "#release_note": "Release Note",
+        "#1_0_0": "1.0.0 Climb Work Calculator",
+        "#1_0_1": "1.0.1 Climb Work bug fix",
+        "#1_1_0": "1.1.0 Aero to Weight Calculator",
+        "#1_2_0": "1.2.0 Flat Work Calculator",
+        "#1_2_1": "1.2.1 Aero to Weight bug fix",
+        "#1_3_0": "1.3.0 Add English",
+        
+        "#license": "License expire 2022/9/30 23:59:59 GMT+08:00",
+        "#copyright": "Content and algorithm: 單車新幹線 Cycle Formula",
+        "#view": "View",
+
+        "#menu_page": "Menu",
+        "#index": "Index",
+        "#routeCal_page": "Climb Work Calculator",
+        "#TTCal_page": "Flat Work Calculator",
+        "#AtoW_page": "Aero to Weight Calculator",
+        "#blog": "Theotical artical",
+        "#Facebook": "Facebook",
+        "#Youtube": "Youtube",
+        "#release_page": "Release Note"
+      }
+    }
+  }

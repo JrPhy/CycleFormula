@@ -6,55 +6,34 @@
 -->
 <html>
 	<head>
-		<title>單車新幹線Cycle Formula</title>
-		<meta charset="utf-8" />
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZLKEEEQYS"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-FZLKEEEQYS');
+		</script>
+		<title id="title_release"></title>
+		<meta content='text/html; charset=UTF-8' http-equiv='Content-type' />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="description" content="用理論計算來分析單車運動 Analyze riding by theory" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="單車新幹線Cycle Formula" />
+		<meta property="og:url" content="https://jrphy.github.io/CycleFormula/" />
+		<meta property="og:image:secure_url" content="https://github.com/JrPhy/CycleFormula/blob/main/images/Cycle_Formula.jpg" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    	<meta name="referrer" content="no-referrer-when-downgrade">
 	</head>
 	<head>
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/langSwitcher.js"></script>
 		<script>
-            Module = {};
-		    Module.onRuntimeInitialized = function() 
-            {
-                return Module._work;
-            }
-            function Cal(form)
-            {
-                const formElement = document.getElementById('form');
-                const route = document.getElementById('route');
-                const riderMass = Number(formElement[0].value);
-                const bikeMass = Number(formElement[1].value);
-                const wantTime = formElement[2].value;
-                let duration = wantTime.split(':');
-                timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
-                if(riderMass < 1 || bikeMass < 1 || timeSeg < 1)
-                {
-                    form.WORK.value = "請輸入正確的數字";
-                    form.Pavg.value = "請輸入正確的數字";
-                }
-                else
-                {
-                    form.WORK.value = Module._work(riderMass, bikeMass, route, timeSeg);
-                    form.Pavg.value = (form.WORK.value*1000/timeSeg).toFixed(1);
-                    if (form.WORK.value == -2)
-                    {
-                        form.WORK.value = "license 過期了";
-                        form.Pavg.value = "請聯絡作者";
-                    }
-                    else if (form.WORK.value == -3)
-                    {
-                        form.WORK.value = "license 被修改過";
-                        form.Pavg.value = "請聯絡作者";
-                    }
-                    else if(form.WORK.value == -1 || isNaN(form.Pavg.value))
-                    {
-                        form.WORK.value = "請輸入正確的數字";
-                        form.Pavg.value = "請輸入正確的數字";
-                    }
-                }
-		    }
+			$(document).ready(function(){
+				$.MultiLanguage('assets/js/release.json');
+			})
 		</script>
-		<script src="assets/js/CycleFormula.js"></script>
 	</head>
 
 	<body class="is-preload">
@@ -76,50 +55,26 @@
 							<!-- Banner -->
 								<section id="banner">
 									<div class="content">
+										<p>
+											<button onclick="$.MultiLanguage('assets/js/release.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+											<button onclick="$.MultiLanguage('assets/js/release.json', 'en')" class="btn">English</button>
+										</p>
 										<header>
-											<h1>路段做功計算機<br /></h1>
-											<h3>輸入以下數據來計算某一路段的做功<br /></h3>
+											<h1 id="release_note"><br /></h1>
+											<h3 id="1_0_0"><br /></h3>
+											<h3 id="1_0_1"><br /></h3>
+											<h3 id="1_1_0"><br /></h3>
+											<h3 id="1_2_0"><br /></h3>
+											<h3 id="1_2_1"><br /></h3>
+											<h3 id="1_3_0"><br /></h3>
 										</header>
-										<form name="form" id="form" method=post>
-											<table>
-											  <tr>
-												<td>人的重量(kg)</td>
-												<td><input type="number" name="riderMass"><br></td>
-											  </tr>
-											  <tr>
-												<td>車與裝備重量(kg)</td>
-												<td><input type="number" name="bikeMass"><br></td>
-											  </tr>
-											  <tr>
-												<td>目標時間(hh:mm:ss)</td>
-												<td><input type="text" placeholder="例如三小時輸入: 3:00:00" name="time"><br></td>
-											  </tr>
-											  <tr>
-												<td>路段選擇</td>
-												<td>
-												  <select name="route" onchange="print_value();">
-													<option value="0" >西進武嶺</option>
-													<option value="1" disabled>東進武嶺</option>
-													<option value="2" disabled>太平山</option>
-													<option value="3" disabled>梅山36彎</option>
-													</select>
-												</td>
-											  <tr>
-												<td><input type="button" value="開始計算" onclick="Cal(this.form)"></td>
-											  </tr>
-											  <tr>
-												<td>預估做功(kJ)</td>
-												<td><input type="text" name="WORK" readonly></td>
-											  </tr>
-											  <tr>
-												<td>平均功率(W)</td>
-												<td><input type="text" name="Pavg" readonly></td>
-											  </tr>
-											</table>
-										  </form>
 									</div>
-								</section>
-								<p class="copyright">&copy; 內容與算法: 單車新幹線 Cycle Formula</p>
+								</section>  
+								<p style="color:#aaaaaa" id="license"></p>
+								<p class="copyright" id="copyright" style="color:#aaaaaa">&copy; </p>
+								<div class="post__meta meta">
+									<span id="busuanzi_container_page_pv" style="color:#aaaaaa"><h5 id="view"></h5><span id="busuanzi_value_page_pv"></span></span>
+								</div>
 						</div>
 					</div>
 
@@ -135,26 +90,21 @@
                         </section>
           
                       <!-- Menu -->
-                        <nav id="menu">
-                          <header class="major">
-                            <h2>選單</h2>
-                          </header>
-                          <ul>
-                            <li><a href="index.html"><h3>首頁</h3></a></li>
-                            <li><a href="route_cal.html"><h3>路段做功計算機</h3></a></li>
-                            <li>
-                              <span class="opener"><h3>騎乘技巧的理論分析</h3></span>
-                              <ul>
-                                <li><a href="#"><h3>Lorem Dolor</h3></a></li>
-                                <li><a href="#"><h3>Ipsum Adipiscing</h3></a></li>
-                                <li><a href="#"><h3>Tempus Magna</h3></a></li>
-                                <li><a href="#"><h3>Feugiat Veroeros</h3></a></li>
-                              </ul>
-                            </li>
-                            <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3>粉絲專頁</h3></a></li>
-                            <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3>頻道影片</h3></a></li>
-                          </ul>
-                        </nav>
+					  <nav id="menu">
+						<header class="major">
+						  <h2 id="menu_page"></h2>
+						</header>
+						<ul>
+							<li><a href="index.html"><h3 id="index"></h3></a></li>
+                            <li><a href="route_cal.html"><h3 id="routeCal_page"></h3></a></li>
+                  			<li><a href="TT_cal.html"><h3 id="TTCal_page"></h3></a></li>
+							<li><a href="AtoW.html"><h3 id="AtoW_page"></h3></a></li>
+                            <li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3 id="blog"></h3></a></li>
+                            <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3 id="Facebook"></h3></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3 id="Youtube"></h3></a></li>
+							<li><a href="release_note.html"><h3 id="release_page"></h3></a></li>
+						</ul>
+					  </nav>
                       <!-- Footer -->
                         <footer id="footer">
                           	<p class="copyright">&copy; 網頁樣板: <a href="https://html5up.net/editorial">editorial</a>. Design: <a href="https://html5up.net/editorial">HTML5 UP</a>.</p>
@@ -165,7 +115,6 @@
               </div>
 
 		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/browser.min.js"></script>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>

@@ -4,7 +4,7 @@
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
-<html>
+<html lang="zh-Hans-TW">
 	<head>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZLKEEEQYS"></script>
@@ -15,10 +15,10 @@
 
 		gtag('config', 'G-FZLKEEEQYS');
 		</script>
-		<title>路段做功計算機 // 單車新幹線Cycle Formula</title>
+		<title id="title_routeCal"></title>
 		<meta content='text/html; charset=UTF-8' http-equiv='Content-type' />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<meta name="description" content="用理論計算來分析單車運動，路段做功計算機幫助你計算爬武嶺的目標做功與均瓦" />
+		<meta name="description" content="用理論計算來分析單車運動 Analyze riding by theory" />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content="單車新幹線Cycle Formula" />
 		<meta property="og:url" content="https://jrphy.github.io/CycleFormula/" />
@@ -34,7 +34,7 @@
 		<script src="assets/js/langSwitcher.js"></script>
 		<script>
 			$(document).ready(function(){
-				$.MultiLanguage('assets/js/language.json');
+				$.MultiLanguage('assets/js/routeCal.json');
 			})
 		</script>
 	</head>
@@ -59,72 +59,55 @@
 								<section id="banner">
 									<div class="content">
 										<header>
-											<!--<h1 id="ml-pluginName"></h1>
 											<p>
-												<h3 id="ml-demo"> </h3>
-												<button onclick="$.MultiLanguage('assets/js/language.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
-												<button onclick="$.MultiLanguage('assets/js/language.json', 'en')" class="btn">English</button>
+												<button onclick="$.MultiLanguage('assets/js/routeCal.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+												<button onclick="$.MultiLanguage('assets/js/routeCal.json', 'en')" class="btn">English</button>
 											</p>
-											<p>
-												<h3 id="ml-howToUse"> </h3>
-												<div><code>$.MultiLanguage('language.json', 'zh-tw') <span id="ml-defaultLangCode"> </span></code></div>
-												<div><code>$.MultiLanguage('language.json', 'en') <span id="ml-enLangCode"> </span></code></div>
-											</p>
-											<p style="color:#aaaaaa" id="ml-msg1"></p>
-											<p style="color:#aaaaaa" class="ml-classA"></p>
-											<p style="color:#aaaaaa" id="ml-msg2"></p>
-											<p style="color:#aaaaaa" class="ml-classA"></p>-->
-											<h1>路段做功計算機<br /></h1>
-											<h3>輸入以下數據來估算某一路段的做功<br /></h3>
-											<h3><font color="red">對標 power tap p1 雙邊數據</font><br /></h3>
-											<h3>為預估<font color="red"></font>無風，個人計時</font>的做功，可當作練車時的目標<br /></h3>
-											<h3>實際騎乘會有些許誤差，例如風向，是否跟車輪車等<br /></h3>
-											<h3>裝備重包含人身部品，如：安全帽+卡鞋+手套，約一公斤<br /></h3>
-											<h3>水壺以一瓶 600 mL，果膠以一條 60 g 來做計算<br /></h3>
-											<h3>有任何問題請私訊粉絲專頁<br /></h3>
+											<h1 id="routeCal"><br /></h1>
+											<h3 id="routeCalHowToUse"></h3>
 										</header>
 										<form name="form" id="form" method=post>
 											<table style="color:#aaaaaa">
 											  <tr>
-												<td>人的重量(kg) <input type="number" value="70" name="riderMass"><br></td>
-												<td>車子重量(kg) <input type="number" value="7" name="bikeMass"><br></td>
+												<td><h4 id="riderMass"></h4> <input type="number" value="70" name="riderMass"><br></td>
+												<td><h4 id="bikeMass"></h4> <input type="number" value="7" name="bikeMass"><br></td>
 											  </tr>
 											  <tr>
-												<td>裝備重量(kg) <input type="number" value="1" name="equipMass"><br></td>
-												<td>跟車時間(% ) <input type="number" value="尚未開放" name="draftTime" disabled><br></td>
+												<td><h4 id="equipMass"></h4> <input type="number" value="1" name="equipMass"><br></td>
+												<td><h4 id="draftTime"></h4> <input type="number" name="draftTime" disabled><br></td>
 											  </tr>
 											  <tr>
-												<td>預計水量(瓶) <input type="number" value="2" name="waterMass"><br></td>
-												<td>預計果膠(條) <input type="number" value="6" name="foodMass"><br></td>
+												<td><h4 id="waterMass"></h4> <input type="number" value="2" name="waterMass"><br></td>
+												<td><h4 id="foodMass"></h4> <input type="number" value="6" name="foodMass"><br></td>
 											  </tr>
 											  <tr>
-												<td>目標時間(hh:mm:ss) <input type="text" value = "3:00:00" placeholder="例如三小時輸入: 3:00:00" name="time" style="color:#000000"><br></td>
-												<td>路段選擇 <select name="route" style="color:#000000">
-													<option value="0" >西進武嶺  52.2 km/2760 m</option>
-													<option value="1" >東進武嶺  83.5 km/3573 m</option>
-													<option value="2" disabled>太平山 </option>
-													<option value="3" disabled>梅山36彎</option>
-													<option value="10" >風凸山 Ventoux  21.5 km/1610 m</option>
-													<option value="11" >富士山登山賽  24 km/1255 m</option>
+												<td><h4 id="time"></h4> <input type="text" value = "3:00:00" name="time" style="color:#000000"><br></td>
+												<td><h4 id="route"></h4> <select name="route" style="color:#000000">
+													<option value="0" id="west-Wuling"> </option>
+													<option value="1" id="east-Wuling"> </option>
+													<option value="2" id="Mt-TaiPing" disabled> </option>
+													<option value="3" id="Mt-Plum" disabled> </option>
+													<option value="10" id="Mt-Ventoux"> </option>
+													<option value="11" id="Mt-Fuji"> </option>
 													</select>
 												<br></td>
 											  </tr>
 											  <tr>
-												<td><br><input type="button" value="開始計算" onclick="routeCal(this.form)"><br></td>
-												<td>計算區間 <input type="text" name="segment" readonly style="color:#000000"><br></td>
+												<td><br><input type="button" value="計算/Calculate" onclick="routeCal(this.form)"><br></td>
+												<td><h4 id="segment"></h4><input type="text" name="segment" readonly style="color:#000000"><br></td>
 											  </tr>
 											  <tr>
-												<td>預估做功(kJ) <input type="text" name="WORK" readonly style="color:#000000"><br></td>
-												<td>平均功率(W) <input type="text" name="Pavg" readonly style="color:#000000"><br></td>
+												<td><h4 id="WORK"></h4><input type="text" name="WORK" readonly style="color:#000000"><br></td>
+												<td><h4 id="Pavg"></h4><input type="text" name="Pavg" readonly style="color:#000000"><br></td>
 											  </tr>
 											</table>
 										  </form>
 									</div>
 								</section>  
-								<p style="color:#aaaaaa">License 時間 2022年9月30日 23:59:59 GMT+08:00</p>
-								<p class="copyright" style="color:#aaaaaa">&copy; 內容與算法: 單車新幹線 Cycle Formula</p>
+								<p style="color:#aaaaaa" id="license"></p>
+								<p class="copyright" id="copyright" style="color:#aaaaaa">&copy; </p>
 								<div class="post__meta meta">
-									<span id="busuanzi_container_page_pv" style="color:#aaaaaa">　觀看數：<span id="busuanzi_value_page_pv"></span></span>
+									<span id="busuanzi_container_page_pv" style="color:#aaaaaa"><h5 id="view"></h5><span id="busuanzi_value_page_pv"></span></span>
 								</div>
 						</div>
 					</div>
@@ -143,22 +126,23 @@
                       <!-- Menu -->
                         <nav id="menu">
                           <header class="major">
-                            <h2>選單</h2>
+                            <h2 id="menu_page"></h2>
                           </header>
                           <ul>
-                            <li><a href="index.html"><h3>首頁</h3></a></li>
-                            <li><a href="route_cal.html"><h3>爬坡做功計算機</h3></a></li>
-                  			<li><a href="TT_cal.html"><h3>平路做功計算機</h3></a></li>
-							<li><a href="AtoW.html"><h3>風阻轉重量計算機</h3></a></li>
-                            <li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3>騎乘技巧的理論分析</h3></a></li>
-                            <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3>粉絲專頁</h3></a></li>
-                            <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3>頻道影片</h3></a></li>
+                            <li><a href="index.html"><h3 id="index"></h3></a></li>
+                            <li><a href="route_cal.html"><h3 id="routeCal_page"></h3></a></li>
+                  			<li><a href="TT_cal.html"><h3 id="TTCal_page"></h3></a></li>
+							<li><a href="AtoW.html"><h3 id="AtoW_page"></h3></a></li>
+                            <li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3 id="blog"></h3></a></li>
+                            <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3 id="Facebook"></h3></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3 id="Youtube"></h3></a></li>
+							<li><a href="release_note.html"><h3 id="release_page"></h3></a></li>
                           </ul>
                         </nav>
                       <!-- Footer -->
                         <footer id="footer">
-                          	<p class="copyright">&copy; 網頁樣板: <a href="https://html5up.net/editorial">editorial</a>. Design: <a href="https://html5up.net/editorial">HTML5 UP</a>.</p>
-                        	<p class="copyright">&copy; 內容與算法: 單車新幹線Cycle Formula</p>
+                          	<p class="copyright">&copy;<a href="https://html5up.net/editorial">editorial</a>. Design: <a href="https://html5up.net/editorial">HTML5 UP</a>.</p>
+							<p class="copyright" style="color:#aaaaaa">&copy;單車新幹線 Cycle Formula </p>
                         </footer>
                     </div>
                   </div>
