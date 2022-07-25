@@ -100,7 +100,6 @@ function TTCal(form)
         form.WORK.value = Module._workFlat(riderMass, bikeMass, equipMass, water, food, route, timeSeg,
                                             bike, pose, deep, Helmet, equip[0], equip[1], equip[2], windSpeed);
         form.Pavg.value = (form.WORK.value*1000/timeSeg).toFixed(1);
-        console.log(form.WORK.value)
         if (form.WORK.value == -2)
         {
             form.WORK.value = "license 過期了";
