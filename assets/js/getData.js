@@ -9,6 +9,7 @@ function routeCal(form)
     const food = Number(forms.elements.foodMass.value);
     const route = Number(forms.elements.route.value);
     const wantTime = forms.elements.time.value;
+    const bike = Number(forms.elements.bike.value);
     let duration = wantTime.split(':');
     timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
     
@@ -27,7 +28,7 @@ function routeCal(form)
     }
     else
     {
-        form.WORK.value = Module._workClimb(riderMass, bikeMass, equipMass, water, food, route, timeSeg);
+        form.WORK.value = Module._workClimb(riderMass, bikeMass, equipMass, water, food, route, timeSeg, bike);
         form.Pavg.value = (form.WORK.value*1000/timeSeg).toFixed(1);
         if (form.WORK.value == -2)
         {
