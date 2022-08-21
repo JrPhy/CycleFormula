@@ -122,3 +122,39 @@ function TTCal(form)
         }
     }
 }
+
+function CPWprime(form)
+{
+    const formElement = document.getElementById('form');
+    const duration0 = Number(formElement[0].value);
+    const power0 = Number(formElement[1].value);
+    const duration1 = Number(formElement[2].value);
+    const power1 = Number(formElement[3].value);
+    const pmax = Number(formElement[5].value);
+    if( duration0 < 0 || duration1 < 0 || power0 < 0 || power1 < 0 || pmax < 0 ||
+        duration0 > duration1 || power0 < power1 || pmax < power1 || pmax < power0) 
+    {
+        form.CP.value = "請輸入正確的數字";
+        form.Wprime.value = "請輸入正確的數字";
+    }
+    else
+    {
+        form.CP.value = Module._cp(pmax, power0, power1, duration0, duration1);
+        form.Wprime.value = (Module._WPrime(pmax, power0, power1, duration0, duration1, form.CP.value)/1000).toFixed(1);
+        if (form.CP.value == -2)
+        {
+            form.CP.value = "license 過期了";
+            form.Wprime.value = "請聯絡作者";
+        }
+        else if (form.CP.value == -3)
+        {
+            form.CP.value = "license 被修改過";
+            form.Wprime.value = "請聯絡作者";
+        }
+        else if(form.CP.value == -1 || isNaN(form.CP.value))
+        {
+            form.CP.value = "請輸入正確的數字";
+            form.Wprime.value = "請輸入正確的數字";
+        }
+    }
+}

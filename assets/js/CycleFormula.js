@@ -195,7 +195,7 @@ var Module = typeof Module != 'undefined' ? Module : {};
     }
 
     }
-    loadPackage({"files": [{"filename": "/license.asc", "start": 0, "end": 975}], "remote_package_size": 975, "package_uuid": "518ab512-e5fd-465d-bf72-adb63557efd6"});
+    loadPackage({"files": [{"filename": "/license.asc", "start": 0, "end": 975}], "remote_package_size": 975, "package_uuid": "67781bac-59f4-4def-89d0-70a4c3fc0616"});
 
   })();
 
@@ -4799,6 +4799,12 @@ var _AtoW = Module["_AtoW"] = createExportWrapper("AtoW");
 
 /** @type {function(...*):?} */
 var _workFlat = Module["_workFlat"] = createExportWrapper("workFlat");
+
+/** @type {function(...*):?} */
+var _cp = Module["_cp"] = createExportWrapper("cp");
+
+/** @type {function(...*):?} */
+var _WPrime = Module["_WPrime"] = createExportWrapper("WPrime");
 
 /** @type {function(...*):?} */
 var ___errno_location = Module["___errno_location"] = createExportWrapper("__errno_location");

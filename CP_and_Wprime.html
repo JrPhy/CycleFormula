@@ -15,7 +15,7 @@
 
 		gtag('config', 'G-FZLKEEEQYS');
 		</script>
-		<title id="title_AtoW"></title>
+		<title id="title_CPWprime"></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="用理論計算來分析單車運動，路段做功計算機幫助你計算爬武嶺的目標做功與均瓦" />
@@ -34,7 +34,7 @@
 		<script src="assets/js/langSwitcher.js"></script>
 		<script>
 			$(document).ready(function(){
-				$.MultiLanguage('assets/js/AtoW.json');
+				$.MultiLanguage('assets/js/CPWprime.json');
 			})
 		</script>
 	</head>
@@ -58,28 +58,32 @@
 								<section id="banner">
 									<div class="content">
 										<p>
-											<button onclick="$.MultiLanguage('assets/js/AtoW.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
-											<button onclick="$.MultiLanguage('assets/js/AtoW.json', 'en')" class="btn">English</button>
+											<button onclick="$.MultiLanguage('assets/js/CPWprime.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+											<button onclick="$.MultiLanguage('assets/js/CPWprime.json', 'en')" class="btn">English</button>
 										</p>
 										<header>
-											<h1 id="AtoW"><br /></h1>
-											<h3 id="AtoWHowToUse"></h3>
+											<h1 id="CPWprime"><br /></h1>
+											<h3 id="CPWprimeHowToUse"></h3>
 										</header>
 										<form name="form" id="form" method=post>
 											<table style="color:#aaaaaa">
 											  <tr>
-												<td><h4 id="CdA"></h4> <input type="number" value="0.3" name="CdA"><br/></td>
-												<td><h4 id="slope"></h4> <input type="number" value="5" name="slope"><br/></td>
+												<td><h4 id="shorterD"></h4> <input type="number" value="120" name="shorterD"><br/></td>
+												<td><h4 id="shorterP"></h4> <input type="number" value="300" name="shorterP"><br/></td>
 											  </tr>
 											  <tr>
-												<td><h4 id="speed"></h4> <input type="number" value="15" name="speed"><br/></td>
-												<td><h4 id="percent"></h4> <input type="number" value="1" name="percent"><br/></td>
+												<td><h4 id="longerD"></h4> <input type="number" value="600" name="longerD"><br/></td>
+												<td><h4 id="longerP"></h4> <input type="number" value="200" name="longerP"><br/></td>
 											  </tr>
 											  <tr>
-												<td><br><input type="button" value="計算/Calculate" onclick="AtoWCal(this.form)"><br/></td>
-												<td><h4 id="weight"></h4> <input type="text" name="weight" readonly style="color:#000000"><br/></td>
+												<td><br><input type="button" value="計算/Calculate" onclick="CPWprime(this.form)"><br/></td>
+												<td><h4 id="Pmax"></h4> <input type="number" value="1000" name="Pmax"><br/></td>
 											  </tr>
 											  </td>
+											  <tr>
+												<td><h4 id="CP"></h4><input type="text" name="CP" readonly style="color:#000000"><br></td>
+												<td><h4 id="Wprime"></h4><input type="text" name="Wprime" readonly style="color:#000000"><br></td>
+											  </tr>
 											</table>
 										  </form>
 									</div>
@@ -113,7 +117,7 @@
 								<li><a href="route_cal.html"><h3 id="routeCal_page"></h3></a></li>
 								<li><a href="TT_cal.html"><h3 id="TTCal_page"></h3></a></li>
 								<li><a href="AtoW.html"><h3 id="AtoW_page"></h3></a></li>
-								<li><a href="CP_and_Wprime.html"><h3 id="CPWPrime_page"></h3></a></li>
+								<li><a href="CP_and_Wprime.html"><h3 id="CPWprime_page"></h3></a></li>
 								<li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3 id="blog"></h3></a></li>
 								<li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3 id="Facebook"></h3></a></li>
 								<li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3 id="Youtube"></h3></a></li>
