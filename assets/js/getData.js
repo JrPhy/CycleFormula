@@ -83,11 +83,12 @@ function TTCal(form)
     const Helmet = Number(forms.elements.helmet.value);
     const route = Number(forms.elements.route.value);
     const windSpeed = Number(forms.elements.windSpeed.value);
+    const draftTime = Number(forms.elements.draftTime.value)/100;
     const wantTime = forms.elements.time.value;
     let duration = wantTime.split(':');
     
     timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
-
+    
     var inputElements = document.getElementsByClassName('equip');
     var equip = new Array(3)
     for (var i = 0; i < inputElements.length; i++)
@@ -103,7 +104,8 @@ function TTCal(form)
     else
     {
         form.WORK.value = Module._workFlat(riderMass, bikeMass, equipMass, water, food, route, timeSeg,
-                                            bike, pose, deep, Helmet, equip[0], equip[1], equip[2], windSpeed);
+                                            bike, pose, deep, Helmet, equip[0], equip[1], equip[2], windSpeed,
+                                            draftTime);
         form.Pavg.value = (form.WORK.value*1000/timeSeg).toFixed(1);
         if (form.WORK.value == -2)
         {
