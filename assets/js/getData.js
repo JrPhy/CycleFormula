@@ -142,7 +142,7 @@ function CPWprime(form)
     else
     {
         form.CP.value = Module._cp(pmax, power0, power1, duration0, duration1);
-        form.Wprime.value = (Module._WPrime(pmax, power0, power1, duration0, duration1, form.CP.value)/1000).toFixed(1);
+        form.Wprime.value = (Module._WPrime(pmax, power0, power1, duration0, duration1, form.CP.value)/1000).toFixed(2);
         if (form.CP.value == -2)
         {
             form.CP.value = "license 過期了";
