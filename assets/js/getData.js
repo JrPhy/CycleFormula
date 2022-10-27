@@ -125,6 +125,27 @@ function TTCal(form)
     }
 }
 
+function convertFortykm(form) 
+{
+    const forms = document.forms['form'];
+    const wantTime = forms.elements.segTime.value;
+    let duration = wantTime.split(':');
+    const dist = Number(forms.elements.segDist.value);
+    var timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
+    timeSeg = timeSeg/3600;
+    var speed = dist/timeSeg;
+    timeSeg = 40/speed;
+    timeSeg = Math.ceil(timeSeg*3600);
+    console.log(timeSeg);
+    hh = Math.floor(timeSeg/3600);
+    console.log(hh);
+    mm = Math.floor((timeSeg - 3600*hh)/60);
+    console.log(mm);
+    ss = timeSeg - 3600*hh - 60*mm;
+    console.log(ss);
+    form.timeFortykm.value = hh+":"+mm+":"+ss;
+}
+
 function CPWprime(form)
 {
     const formElement = document.getElementById('form');
