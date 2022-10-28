@@ -59,7 +59,7 @@
         "#segTime": "區段時間 (hh:mm:ss)",
         "#segDist": "區段距離 (km)",
         "#timeFortykm": "40 km 時間 (hh:mm:ss)",
-        "#license": "License 時間 2022年9月30日 23:59:59 GMT+08:00",
+        "#license": "License 時間 2022/12/31 23:59:59 GMT+08:00",
         "#copyright": "內容與算法: 單車新幹線 Cycle Formula",
         "#view": "觀看數"
       },
@@ -120,7 +120,7 @@
         "#segTime": "Segment Time (hh:mm:ss)",
         "#segDist": "Segment (km)",
         "#timeFortykm": "40 km Time (hh:mm:ss)",
-        "#license": "License expire 2022/9/30 23:59:59 GMT+08:00",
+        "#license": "License expire 2022/12/31 23:59:59 GMT+08:00",
         "#copyright": "Content and algorithm: 單車新幹線 Cycle Formula",
         "#view": "View"
       }
