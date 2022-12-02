@@ -7,16 +7,6 @@
 <html>
 	<head>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZLKEEEQYS"></script>
-		<script>
-		var doNotTrack = false;
-		if (!doNotTrack) {
-			window.dataLayer = window.dataLayer || [];
-			function gtag(){dataLayer.push(arguments);}
-			gtag('js', new Date());
-			gtag('config', 'G-FZLKEEEQYS', { 'anonymize_ip': false });
-		}
-		</script>
 		<title id="title_TTCal"></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -29,6 +19,16 @@
 		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     	<meta name="referrer" content="no-referrer-when-downgrade">
 	</head>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZLKEEEQYS"></script>
+	<script>
+	var doNotTrack = false;
+	if (!doNotTrack) {
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'G-FZLKEEEQYS', { 'anonymize_ip': false });
+	}
+	</script>
 	<head>
 		<script src="assets/js/getData.js"></script>
 		<script src="assets/js/CycleFormula.js"></script>
@@ -170,13 +170,12 @@
 													<option value="40" >40 km</option>
 													<option value="45" >45 km</option>
 													<option value="90" >90 km</option>
-													<option value="510" >510 km 一日雙塔</option>
 													</select>
 												<br></td>
 											  </tr>
 											  <tr>
 												<td><h4 id="time"></h4> <input type="text" value = "0:30:00" name="time" style="color:#000000"><br></td>
-												<td><h4 id="draftTime"></h4> <input type="text" value = "60" name="draftTime" style="color:#000000"><br></td>
+												<td><h4 id="draftTime"></h4> <input type="text" value = "0" name="draftTime" style="color:#000000"><br></td>
 											  </tr>
 											  <tr>
 												<td><input type="button" value="計算/Calculate" onclick="TTCal(this.form)"></td>
@@ -185,14 +184,6 @@
 											  <tr>
 												<td><h4 id="WORK"></h4> <input type="text" name="WORK" readonly style="color:#000000"></td>
 												<td><h4 id="Pavg"></h4> <input type="text" name="Pavg" readonly style="color:#000000"></td>
-											  </tr>
-											  <tr>
-												<td><h4 id="segTime"></h4> <input type="text" value = "00:50:00" name="segTime" style="color:#000000"><br></td>
-												<td><h4 id="segDist"></h4> <input type="text" value = "35" name="segDist" style="color:#000000"><br></td>
-											  </tr>
-											  <tr>
-												<td><input type="button" value="40 km 換算/ 40 km Convert" onclick="convertFortykm(this.form)"></td>
-												<td><h4 id="timeFortykm"></h4> <input type="text" name="timeFortykm" readonly style="color:#000000"></td>
 											  </tr>
 											</table>
 										  </form>
