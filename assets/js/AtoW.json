@@ -29,7 +29,7 @@
         "#speed": "時速 (km/h)",
         "#percent": "減少比例 (%)",
         "#weight": "等效減少重量 (g)",
-        "#license": "License 時間 2022/12/31 23:59:59 GMT+08:00",
+        "#license": "License 時間 2023/03/31 23:59:59 GMT+08:00",
         "#copyright": "內容與算法: 單車新幹線 Cycle Formula",
         "#view": "觀看數"
       },
@@ -59,7 +59,7 @@
         "#speed": "Speed (km/h)",
         "#percent": "Percent (%)",
         "#weight": "Equivalent Weight (g)",
-        "#license": "License expire 2022/12/31 23:59:59 GMT+08:00",
+        "#license": "License expire 2023/03/31 23:59:59 GMT+08:00",
         "#copyright": "Content and algorithm: 單車新幹線 Cycle Formula",
         "#view": "View"
       }
