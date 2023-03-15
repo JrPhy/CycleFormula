@@ -4,7 +4,6 @@
   },
   "language": {
     "zh-tw": {
-      "#title_CPWprime": "CP/CV 與 W' 計算機 // 單車新幹線 Cycle Formula",
       "#index": "首頁",
       "#menu_page": "選單",
       "#routeCal_page": "爬坡路段計算機",
@@ -33,7 +32,6 @@
       "#view": "觀看數"
     },
     "en": {
-      "#title_CPWprime": "CP/CV and W' Calculator // 單車新幹線 Cycle Formula",
       "#index": "Index",
       "#menu_page": "Menu",
       "#routeCal_page": "Climb Segment Calculator",

@@ -4,9 +4,7 @@
     },
     "language": {
       "zh-tw": {
-        "#title_routeCal": "爬坡路段計算機 // 單車新幹線 Cycle Formula",
         "#routeCal": "爬坡路段計算機",
-        
         "#menu_page": "選單",
         "#index": "首頁",
         "#routeCal_page": "爬坡路段計算機",
@@ -51,7 +49,6 @@
         "#view": "觀看數"
       },
       "en": {
-        "#title_routeCal": "Climb Segment Calculator // 單車新幹線 Cycle Formula",
         "#routeCal": "Climb Segment Calculator",
         "#index": "Index",
         "#menu_page": "Menu",

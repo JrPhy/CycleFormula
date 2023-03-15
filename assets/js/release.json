@@ -4,7 +4,6 @@
     },
     "language": {
       "zh-tw": {
-        "#title_release": "版本紀錄 // 單車新幹線 Cycle Formula",
         "#release_note": "版本紀錄",
         "#1_0_0": "1.0.0 爬坡路段計算機",
         "#1_0_1": "1.0.1 爬坡路段錯誤修復",
@@ -33,7 +32,6 @@
         "#log_sign_page": "登入/註冊"
      },
       "en": {
-        "#title_release": "Release Note // 單車新幹線 Cycle Formula",
         "#release_note": "Release Note",
         "#1_0_0": "1.0.0 Climb Segment Calculator",
         "#1_0_1": "1.0.1 Climb Segment bug fix",
