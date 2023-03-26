@@ -16,7 +16,11 @@ function routeCal(form)
     if(route == 0)
     {form.segment.value = "中心碑 - 武嶺牌樓"}
     else if(route == 1)
-    {form.segment.value = "放行點 - 武嶺牌樓"}
+    {form.segment.value = "太魯閣牌樓 - 武嶺牌樓"}
+    else if(route == 2)
+    {form.segment.value = "土場 - 見晴古道"}
+    else if(route == 4)
+    {form.segment.value = "龍神橋 - 遊客中心"}
     else if(route == 10)
     {form.segment.value = "Bedoin - Top"}
     else if(route == 11)
@@ -88,7 +92,6 @@ function TTCal(form)
     let duration = wantTime.split(':');
     
     timeSeg = Number(duration[0])*3600 + Number(duration[1])*60 + Number(duration[2]);
-    
     var inputElements = document.getElementsByClassName('equip');
     var equip = new Array(3)
     for (var i = 0; i < inputElements.length; i++)
