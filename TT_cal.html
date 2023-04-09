@@ -71,11 +71,11 @@
 											<script>
 											function TimeTrailBike() 
 											{
-												document.getElementById("HandleBar").checked = true;
-												document.getElementById("Suit").checked = true;
-												document.getElementById("ShoeCover").checked = true;
-												document.getElementById("TTHelmet").checked = true;
-												document.getElementById("TTP").checked = true;
+												document.getElementById("Bar").checked = true;
+												document.getElementById("Skinsuit").checked = true;
+												document.getElementById("SockCover").checked = true;
+												document.getElementById("TTHel").checked = true;
+												document.getElementById("TTPose").checked = true;
 												document.querySelector('#deep [value="' + '4' + '"]').selected = true;
 											}
 											</script>
@@ -94,14 +94,14 @@
 											  </tr>
 											  <tr>
 												<td><h4 id="bike"></h4>
-													<input type="radio" name="bike" id="NormalBike" value="0">
-													<label for="NormalBike">Normal/爬坡</label>
-												
-													<input type="radio" name="bike" id="AeroBike" value="1" checked>
-													<label for="AeroBike">Aero/空力</label>
-												
-													<input type="radio" name="bike" id="TTBike" value="2" onclick="TimeTrailBike();">
-													<label for="TTBike">TT/計車</label>
+													<input type="radio" name="bike" id="ClimbBi" value="0">
+													<label for="ClimbBi"><h4 id="NormalBike"></h4></label>
+
+													<input type="radio" name="bike" id="AeroBi" value="1" checked>
+													<label for="AeroBi"><h4 id="AeroBike"></h4></label>
+
+													<input type="radio" name="bike" id="TTBi" value="2" onclick="TimeTrailBike();">
+													<label for="TTBi"><h4 id="TTBike"></h4></label>
 													<!--<input type="radio" name="NormalBike" value="0">
 													<label for="NormalBike"><h4 id="NormalBike"></h4></label>
 												
@@ -112,36 +112,36 @@
 													<label for="TTBike"><h4 id="TTBike"></h4></label>-->
 												  <br></td>
 												<td><h4 id="equip"></h4>
-													<input class="equip" type="checkbox" id="HandleBar"  value="1" />
-													<label for="HandleBar">TT Bar/計時把</label>
+													<input class="equip" type="checkbox" id="Bar"  value="1" />
+													<label for="Bar"><h4 id="HandleBar"></h4></label>
 													
-													<input class="equip" type="checkbox" id="Suit"  value="1" />
-													<label for="Suit">Skinsuit/連身衣</label>
+													<input class="equip" type="checkbox" id="Skinsuit"  value="1" />
+													<label for="Skinsuit"><h4 id="Suit"></h4></label>
 													
-													<input class="equip" type="checkbox" id="ShoeCover"  value="1" />
-													<label for="ShoeCover">Sock/Cover/襪/鞋套</label>
+													<input class="equip" type="checkbox" id="SockCover"  value="1" />
+													<label for="SockCover"><h4 id="ShoeCover"></h4></label>
 												  <br></td>
 											  </tr>
 											  <tr>
 												<td><h4 id="helmet"></h4>
-													<input type="radio" name="helmet" id="NormalHelmet" value="0">
-													<label for="NormalHelmet">Normal/一般</label>
+													<input type="radio" name="helmet" id="NormalHel" value="0">
+													<label for="NormalHel"><h4 id="NormalHelmet"></h4></label>
 												
-													<input type="radio" name="helmet" id="AeroHelmet" value="1" checked>
-													<label for="AeroHelmet">Aero/空力</label>
+													<input type="radio" name="helmet" id="AeroHel" value="1" checked>
+													<label for="AeroHel"><h4 id="AeroHelmet"></h4></label>
 												
-													<input type="radio" name="helmet" id="TTHelmet" value="2">
-													<label for="TTHelmet">TT/計時</label>
+													<input type="radio" name="helmet" id="TTHel" value="2">
+													<label for="TTHel"><h4 id="TTHelmet"></h4></label>
 												  <br></td>
 												<td><h4 id="pose"></h4>
-													<input type="radio" name="pose" id="UPP" value="0">
-													<label for="UPP">Normal/一般</label>
+													<input type="radio" name="pose" id="NormalPose" value="0">
+													<label for="NormalPose"><h4 id="UPP"></h4></label>
 												
-													<input type="radio" name="pose" id="DPP" value="1" checked>
-													<label for="DPP">Aero/空力</label>
+													<input type="radio" name="pose" id="OownPose" value="1" checked>
+													<label for="OownPose"><h4 id="DPP"></h4></label>
 												
-													<input type="radio" name="pose" id="TTP" value="2">
-													<label for="TTP">TT/計時</label>
+													<input type="radio" name="pose" id="TTPose" value="2">
+													<label for="TTPose"><h4 id="TTP"></h4></label>
 													<!--<input type="radio" name="pose" id="UPP" value="0" onclick="position('UPP');">
 													<label for="UPP">一般</label>
 												
