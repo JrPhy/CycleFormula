@@ -73,6 +73,25 @@ function AtoWCal(form)
     }
 }
 
+function LE8Cal(form)
+{
+    const forms = document.forms['form'];
+    const Feed = Number(forms.elements.Feed.value);
+    const activity = Number(forms.elements.activity.value);
+    const smoke = Number(forms.elements.smoke.value);
+    const sleep = Number(forms.elements.sleep.value);
+    const bmi = Number(forms.elements.bmi.value);
+    const bfat = Number(forms.elements.bfat.value);
+    const bsugar = Number(forms.elements.bsugar.value);
+    const bpressure = Number(forms.elements.bpressure.value);
+    form.LE8_total.value = Feed+activity+smoke+sleep+bmi+bfat+bsugar+bpressure;
+    var inputElements = document.getElementsByClassName('minus_20');
+    for (var i = 0; i < inputElements.length; i++)
+    {
+        if (inputElements[i].checked) form.LE8_total.value = form.LE8_total.value - 20;
+    }
+}
+
 function TTCal(form)
 {
     const forms = document.forms['form'];

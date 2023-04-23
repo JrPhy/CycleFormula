@@ -1,0 +1,41 @@
+{
+    "config": {
+      "default": "zh-tw"
+    },
+    "language": {
+      "zh-tw": {
+        "#menu_page": "選單",
+        "#index": "首頁",
+        "#routeCal_page": "爬坡做功計算機",
+        "#TTCal_page": "平路做功計算機",
+        "#AtoW_page": "風阻轉重量計算機",
+        "#CPWPrime_page": "CP/CV 與 W' 計算機",
+        "#LE8_page": "久活評分系統",
+        "#blog": "騎乘技巧的理論分析",
+        "#Facebook": "粉絲專頁",
+        "#Youtube": "頻道頁面",
+        "#release_page": "版本紀錄",
+        "#log_sign_page": "登入/註冊",
+        "#license": "License 時間 2023/06/30 23:59:59 GMT+08:00",
+        "#copyright": "內容與算法: 單車新幹線 Cycle Formula",
+        "#view": "觀看數"
+     },
+      "en": {
+        "#menu_page": "Menu",
+        "#index": "Index",
+        "#routeCal_page": "Climb Segment Calculator",
+        "#TTCal_page": "Flat Segment Calculator",
+        "#AtoW_page": "Aero to Weight Calculator",
+        "#CPWPrime_page": "CP/CV and W' Calculator",
+        "#LE8_page": "Life's Essential 8",
+        "#blog": "Theotical artical",
+        "#Facebook": "Facebook",
+        "#Youtube": "Youtube",
+        "#release_page": "Release Note",
+        "#log_sign_page": "Log/Sign in",
+        "#license": "License expire 2023/06/30 23:59:59 GMT+08:00",
+        "#copyright": "Content and algorithm: 單車新幹線 Cycle Formula",
+        "#view": "View"
+      }
+    }
+  }
