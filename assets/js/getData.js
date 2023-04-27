@@ -19,7 +19,7 @@ function routeCal(form)
     {form.segment.value = "太魯閣牌樓 - 武嶺牌樓"}
     else if(route == 2)
     {form.segment.value = "土場 - 見晴古道"}
-    else if(route == 4)
+    else if(route == 3)
     {form.segment.value = "龍神橋 - 遊客中心"}
     else if(route == 10)
     {form.segment.value = "Bedoin - Top"}
