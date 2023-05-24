@@ -82,7 +82,7 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
               num++;
             }
             total = Math.ceil(total * Module.expectedDataFileDownloads/num);
-            if (Module['setStatus']) Module['setStatus']('Downloading data... (' + loaded + '/' + total + ')');
+            if (Module['setStatus']) Module['setStatus'](`Downloading data... (${loaded}/${total})`);
           } else if (!Module.dataFileDownloads) {
             if (Module['setStatus']) Module['setStatus']('Downloading data...');
           }
@@ -134,7 +134,7 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
         open: function(mode, name) {
           this.name = name;
           this.requests[name] = this;
-          Module['addRunDependency']('fp ' + this.name);
+          Module['addRunDependency'](`fp ${this.name}`);
         },
         send: function() {},
         onload: function() {
@@ -145,7 +145,7 @@ var REMOTE_PACKAGE_SIZE = metadata['remote_package_size'];
           var that = this;
           // canOwn this data in the filesystem, it is a slide into the heap that will never change
           Module['FS_createDataFile'](this.name, null, byteArray, true, true, true);
-          Module['removeRunDependency']('fp ' + that.name);
+          Module['removeRunDependency'](`fp ${that.name}`);
           this.requests[this.name] = null;
         }
       };
@@ -387,7 +387,7 @@ if (ENVIRONMENT_IS_SHELL) {
           if (toThrow && typeof toThrow == 'object' && toThrow.stack) {
             toLog = [toThrow, toThrow.stack];
           }
-          err('exiting due to exception: ' + toLog);
+          err(`exiting due to exception: ${toLog}`);
         }
         quit(status);
       });
@@ -473,7 +473,7 @@ read_ = (url) => {
 }
 
 var out = Module['print'] || console.log.bind(console);
-var err = Module['printErr'] || console.warn.bind(console);
+var err = Module['printErr'] || console.error.bind(console);
 
 // Merge back in the overrides
 Object.assign(Module, moduleOverrides);
@@ -1168,8 +1168,8 @@ function unexportedRuntimeSymbol(sym) {
 // Used by XXXXX_DEBUG settings to output debug messages.
 function dbg(text) {
   // TODO(sbc): Make this configurable somehow.  Its not always convenient for
-  // logging to show up as errors.
-  console.error.apply(console, arguments);
+  // logging to show up as warnings.
+  console.warn.apply(console, arguments);
 }
 
 // end include: runtime_debug.js
@@ -1208,7 +1208,7 @@ function dbg(text) {
       case 'float': return HEAPF32[((ptr)>>2)];
       case 'double': return HEAPF64[((ptr)>>3)];
       case '*': return HEAPU32[((ptr)>>2)];
-      default: abort('invalid type for getValue: ' + type);
+      default: abort(`invalid type for getValue: ${type}`);
     }
   }
 
@@ -1234,7 +1234,7 @@ function dbg(text) {
       case 'float': HEAPF32[((ptr)>>2)] = value; break;
       case 'double': HEAPF64[((ptr)>>3)] = value; break;
       case '*': HEAPU32[((ptr)>>2)] = value; break;
-      default: abort('invalid type for setValue: ' + type);
+      default: abort(`invalid type for setValue: ${type}`);
     }
   }
 
@@ -1992,7 +1992,7 @@ function dbg(text) {
   
   /** @param {boolean=} noRunDep */
   function asyncLoad(url, onload, onerror, noRunDep) {
-      var dep = !noRunDep ? getUniqueRunDependency('al ' + url) : '';
+      var dep = !noRunDep ? getUniqueRunDependency(`al ${url}`) : '';
       readAsync(url, (arrayBuffer) => {
         assert(arrayBuffer, `Loading data file "${url}" failed (no arrayBuffer).`);
         onload(new Uint8Array(arrayBuffer));
@@ -2026,7 +2026,7 @@ function dbg(text) {
       // TODO we should allow people to just pass in a complete filename instead
       // of parent and name being that we just join them anyways
       var fullname = name ? PATH_FS.resolve(PATH.join2(parent, name)) : parent;
-      var dep = getUniqueRunDependency('cp ' + fullname); // might have several active requests for the same fullname
+      var dep = getUniqueRunDependency(`cp ${fullname}`); // might have several active requests for the same fullname
       function processData(byteArray) {
         function finish(byteArray) {
           if (preFinish) preFinish();
@@ -2063,7 +2063,7 @@ function dbg(text) {
       };
       var flags = flagModes[str];
       if (typeof flags == 'undefined') {
-        throw new Error('Unknown file open mode: ' + str);
+        throw new Error(`Unknown file open mode: ${str}`);
       }
       return flags;
     }
@@ -2159,9 +2159,9 @@ function dbg(text) {
           if (FS.isRoot(node)) {
             var mount = node.mount.mountpoint;
             if (!path) return mount;
-            return mount[mount.length-1] !== '/' ? mount + '/' + path : mount + path;
+            return mount[mount.length-1] !== '/' ? `${mount}/${path}` : mount + path;
           }
-          path = path ? node.name + '/' + path : node.name;
+          path = path ? `${node.name}/${path}` : node.name;
           node = node.parent;
         }
       },hashName:(parentid, name) => {
@@ -2386,7 +2386,7 @@ function dbg(text) {
         FS.syncFSRequests++;
   
         if (FS.syncFSRequests > 1) {
-          err('warning: ' + FS.syncFSRequests + ' FS.syncfs operations in flight at once, probably just doing extra work');
+          err(`warning: ${FS.syncFSRequests} FS.syncfs operations in flight at once, probably just doing extra work`);
         }
   
         var mounts = FS.getMounts(FS.root.mount);
@@ -3029,7 +3029,7 @@ function dbg(text) {
         opts.flags = opts.flags || 0;
         opts.encoding = opts.encoding || 'binary';
         if (opts.encoding !== 'utf8' && opts.encoding !== 'binary') {
-          throw new Error('Invalid encoding type "' + opts.encoding + '"');
+          throw new Error(`Invalid encoding type "${opts.encoding}"`);
         }
         var ret;
         var stream = FS.open(path, opts.flags);
@@ -3160,9 +3160,9 @@ function dbg(text) {
         var stdin = FS.open('/dev/stdin', 0);
         var stdout = FS.open('/dev/stdout', 1);
         var stderr = FS.open('/dev/stderr', 1);
-        assert(stdin.fd === 0, 'invalid handle for stdin (' + stdin.fd + ')');
-        assert(stdout.fd === 1, 'invalid handle for stdout (' + stdout.fd + ')');
-        assert(stderr.fd === 2, 'invalid handle for stderr (' + stderr.fd + ')');
+        assert(stdin.fd === 0, `invalid handle for stdin (${stdin.fd})`);
+        assert(stdout.fd === 1, `invalid handle for stdout (${stdout.fd})`);
+        assert(stderr.fd === 2, `invalid handle for stderr (${stderr.fd})`);
       },ensureErrnoError:() => {
         if (FS.ErrnoError) return;
         FS.ErrnoError = /** @this{Object} */ function ErrnoError(errno, node) {

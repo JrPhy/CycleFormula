@@ -29,6 +29,12 @@ function routeCal(form)
     {form.segment.value = "Chom Thom - Top"}
     else if(route == 13)
     {form.segment.value = "Batang Kali - Top"}
+    else if(route == 50)
+    {form.segment.value = "楼牌 - 停车场"}
+    else if(route == 51)
+    {form.segment.value = "?? - ??"}
+    else if(route == 52)
+    {form.segment.value = "小桥 - 12.5Km"}
     if( riderMass < 1 || bikeMass < 1 || equipMass < 0 || water < 0 || food < 0 || timeSeg < 1)
     {
         form.WORK.value = "請輸入正確的數字";
