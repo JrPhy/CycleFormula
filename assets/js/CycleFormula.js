@@ -1480,6 +1480,60 @@ function dbg(text) {
     if (dontAddNull) u8array.length = numBytesWritten;
     return u8array;
   }
+  
+  var UTF8Decoder = typeof TextDecoder != 'undefined' ? new TextDecoder('utf8') : undefined;
+  
+    /**
+     * Given a pointer 'idx' to a null-terminated UTF8-encoded string in the given
+     * array that contains uint8 values, returns a copy of that string as a
+     * Javascript String object.
+     * heapOrArray is either a regular array, or a JavaScript typed array view.
+     * @param {number} idx
+     * @param {number=} maxBytesToRead
+     * @return {string}
+     */
+  function UTF8ArrayToString(heapOrArray, idx, maxBytesToRead) {
+      var endIdx = idx + maxBytesToRead;
+      var endPtr = idx;
+      // TextDecoder needs to know the byte length in advance, it doesn't stop on
+      // null terminator by itself.  Also, use the length info to avoid running tiny
+      // strings through TextDecoder, since .subarray() allocates garbage.
+      // (As a tiny code save trick, compare endPtr against endIdx using a negation,
+      // so that undefined means Infinity)
+      while (heapOrArray[endPtr] && !(endPtr >= endIdx)) ++endPtr;
+  
+      if (endPtr - idx > 16 && heapOrArray.buffer && UTF8Decoder) {
+        return UTF8Decoder.decode(heapOrArray.subarray(idx, endPtr));
+      }
+      var str = '';
+      // If building with TextDecoder, we have already computed the string length
+      // above, so test loop end condition against that
+      while (idx < endPtr) {
+        // For UTF8 byte structure, see:
+        // http://en.wikipedia.org/wiki/UTF-8#Description
+        // https://www.ietf.org/rfc/rfc2279.txt
+        // https://tools.ietf.org/html/rfc3629
+        var u0 = heapOrArray[idx++];
+        if (!(u0 & 0x80)) { str += String.fromCharCode(u0); continue; }
+        var u1 = heapOrArray[idx++] & 63;
+        if ((u0 & 0xE0) == 0xC0) { str += String.fromCharCode(((u0 & 31) << 6) | u1); continue; }
+        var u2 = heapOrArray[idx++] & 63;
+        if ((u0 & 0xF0) == 0xE0) {
+          u0 = ((u0 & 15) << 12) | (u1 << 6) | u2;
+        } else {
+          if ((u0 & 0xF8) != 0xF0) warnOnce('Invalid UTF-8 leading byte ' + ptrToString(u0) + ' encountered when deserializing a UTF-8 string in wasm memory to a JS string!');
+          u0 = ((u0 & 7) << 18) | (u1 << 12) | (u2 << 6) | (heapOrArray[idx++] & 63);
+        }
+  
+        if (u0 < 0x10000) {
+          str += String.fromCharCode(u0);
+        } else {
+          var ch = u0 - 0x10000;
+          str += String.fromCharCode(0xD800 | (ch >> 10), 0xDC00 | (ch & 0x3FF));
+        }
+      }
+      return str;
+    }
   var TTY = {ttys:[],init:function () {
         // https://github.com/emscripten-core/emscripten/pull/1555
         // if (ENVIRONMENT_IS_NODE) {
@@ -1940,17 +1994,85 @@ function dbg(text) {
   function asyncLoad(url, onload, onerror, noRunDep) {
       var dep = !noRunDep ? getUniqueRunDependency('al ' + url) : '';
       readAsync(url, (arrayBuffer) => {
-        assert(arrayBuffer, 'Loading data file "' + url + '" failed (no arrayBuffer).');
+        assert(arrayBuffer, `Loading data file "${url}" failed (no arrayBuffer).`);
         onload(new Uint8Array(arrayBuffer));
         if (dep) removeRunDependency(dep);
       }, (event) => {
         if (onerror) {
           onerror();
         } else {
-          throw 'Loading data file "' + url + '" failed.';
+          throw `Loading data file "${url}" failed.`;
         }
       });
       if (dep) addRunDependency(dep);
+    }
+  
+  var preloadPlugins = Module['preloadPlugins'] || [];
+  function FS_handledByPreloadPlugin(byteArray, fullname, finish, onerror) {
+      // Ensure plugins are ready.
+      if (typeof Browser != 'undefined') Browser.init();
+  
+      var handled = false;
+      preloadPlugins.forEach(function(plugin) {
+        if (handled) return;
+        if (plugin['canHandle'](fullname)) {
+          plugin['handle'](byteArray, fullname, finish, onerror);
+          handled = true;
+        }
+      });
+      return handled;
+    }
+  function FS_createPreloadedFile(parent, name, url, canRead, canWrite, onload, onerror, dontCreateFile, canOwn, preFinish) {
+      // TODO we should allow people to just pass in a complete filename instead
+      // of parent and name being that we just join them anyways
+      var fullname = name ? PATH_FS.resolve(PATH.join2(parent, name)) : parent;
+      var dep = getUniqueRunDependency('cp ' + fullname); // might have several active requests for the same fullname
+      function processData(byteArray) {
+        function finish(byteArray) {
+          if (preFinish) preFinish();
+          if (!dontCreateFile) {
+            FS.createDataFile(parent, name, byteArray, canRead, canWrite, canOwn);
+          }
+          if (onload) onload();
+          removeRunDependency(dep);
+        }
+        if (FS_handledByPreloadPlugin(byteArray, fullname, finish, () => {
+          if (onerror) onerror();
+          removeRunDependency(dep);
+        })) {
+          return;
+        }
+        finish(byteArray);
+      }
+      addRunDependency(dep);
+      if (typeof url == 'string') {
+        asyncLoad(url, (byteArray) => processData(byteArray), onerror);
+      } else {
+        processData(url);
+      }
+    }
+  
+  function FS_modeStringToFlags(str) {
+      var flagModes = {
+        'r': 0,
+        'r+': 2,
+        'w': 512 | 64 | 1,
+        'w+': 512 | 64 | 2,
+        'a': 1024 | 64 | 1,
+        'a+': 1024 | 64 | 2,
+      };
+      var flags = flagModes[str];
+      if (typeof flags == 'undefined') {
+        throw new Error('Unknown file open mode: ' + str);
+      }
+      return flags;
+    }
+  
+  function FS_getMode(canRead, canWrite) {
+      var mode = 0;
+      if (canRead) mode |= 292 | 73;
+      if (canWrite) mode |= 146;
+      return mode;
     }
   
   
@@ -2108,12 +2230,6 @@ function dbg(text) {
         return (mode & 61440) === 4096;
       },isSocket:(mode) => {
         return (mode & 49152) === 49152;
-      },flagModes:{"r":0,"r+":2,"w":577,"w+":578,"a":1089,"a+":1090},modeStringToFlags:(str) => {
-        var flags = FS.flagModes[str];
-        if (typeof flags == 'undefined') {
-          throw new Error('Unknown file open mode: ' + str);
-        }
-        return flags;
       },flagsToPermissionString:(flag) => {
         var perms = ['r', 'w', 'rw'][flag & 3];
         if ((flag & 512)) {
@@ -2694,7 +2810,7 @@ function dbg(text) {
         if (path === "") {
           throw new FS.ErrnoError(44);
         }
-        flags = typeof flags == 'string' ? FS.modeStringToFlags(flags) : flags;
+        flags = typeof flags == 'string' ? FS_modeStringToFlags(flags) : flags;
         mode = typeof mode == 'undefined' ? 438 /* 0666 */ : mode;
         if ((flags & 64)) {
           mode = (mode & 4095) | 32768;
@@ -3123,11 +3239,6 @@ function dbg(text) {
           }
           FS.close(stream);
         }
-      },getMode:(canRead, canWrite) => {
-        var mode = 0;
-        if (canRead) mode |= 292 | 73;
-        if (canWrite) mode |= 146;
-        return mode;
       },findObject:(path, dontResolveLastLink) => {
         var ret = FS.analyzePath(path, dontResolveLastLink);
         if (!ret.exists) {
@@ -3178,7 +3289,7 @@ function dbg(text) {
         return current;
       },createFile:(parent, name, properties, canRead, canWrite) => {
         var path = PATH.join2(typeof parent == 'string' ? parent : FS.getPath(parent), name);
-        var mode = FS.getMode(canRead, canWrite);
+        var mode = FS_getMode(canRead, canWrite);
         return FS.create(path, mode);
       },createDataFile:(parent, name, data, canRead, canWrite, canOwn) => {
         var path = name;
@@ -3186,7 +3297,7 @@ function dbg(text) {
           parent = typeof parent == 'string' ? parent : FS.getPath(parent);
           path = name ? PATH.join2(parent, name) : parent;
         }
-        var mode = FS.getMode(canRead, canWrite);
+        var mode = FS_getMode(canRead, canWrite);
         var node = FS.create(path, mode);
         if (data) {
           if (typeof data == 'string') {
@@ -3204,7 +3315,7 @@ function dbg(text) {
         return node;
       },createDevice:(parent, name, input, output) => {
         var path = PATH.join2(typeof parent == 'string' ? parent : FS.getPath(parent), name);
-        var mode = FS.getMode(!!input, !!output);
+        var mode = FS_getMode(!!input, !!output);
         if (!FS.createDevice.major) FS.createDevice.major = 64;
         var dev = FS.makedev(FS.createDevice.major++, 0);
         // Create a fake device that a set of stream ops to emulate
@@ -3439,34 +3550,6 @@ function dbg(text) {
         };
         node.stream_ops = stream_ops;
         return node;
-      },createPreloadedFile:(parent, name, url, canRead, canWrite, onload, onerror, dontCreateFile, canOwn, preFinish) => {
-        // TODO we should allow people to just pass in a complete filename instead
-        // of parent and name being that we just join them anyways
-        var fullname = name ? PATH_FS.resolve(PATH.join2(parent, name)) : parent;
-        var dep = getUniqueRunDependency('cp ' + fullname); // might have several active requests for the same fullname
-        function processData(byteArray) {
-          function finish(byteArray) {
-            if (preFinish) preFinish();
-            if (!dontCreateFile) {
-              FS.createDataFile(parent, name, byteArray, canRead, canWrite, canOwn);
-            }
-            if (onload) onload();
-            removeRunDependency(dep);
-          }
-          if (Browser.handledByPreloadPlugin(byteArray, fullname, finish, () => {
-            if (onerror) onerror();
-            removeRunDependency(dep);
-          })) {
-            return;
-          }
-          finish(byteArray);
-        }
-        addRunDependency(dep);
-        if (typeof url == 'string') {
-          asyncLoad(url, (byteArray) => processData(byteArray), onerror);
-        } else {
-          processData(url);
-        }
       },absolutePath:() => {
         abort('FS.absolutePath has been removed; use PATH_FS.resolve instead');
       },createFolder:() => {
@@ -3481,59 +3564,6 @@ function dbg(text) {
         abort('FS.standardizePath has been removed; use PATH.normalize instead');
       }};
   
-  var UTF8Decoder = typeof TextDecoder != 'undefined' ? new TextDecoder('utf8') : undefined;
-  
-    /**
-     * Given a pointer 'idx' to a null-terminated UTF8-encoded string in the given
-     * array that contains uint8 values, returns a copy of that string as a
-     * Javascript String object.
-     * heapOrArray is either a regular array, or a JavaScript typed array view.
-     * @param {number} idx
-     * @param {number=} maxBytesToRead
-     * @return {string}
-     */
-  function UTF8ArrayToString(heapOrArray, idx, maxBytesToRead) {
-      var endIdx = idx + maxBytesToRead;
-      var endPtr = idx;
-      // TextDecoder needs to know the byte length in advance, it doesn't stop on
-      // null terminator by itself.  Also, use the length info to avoid running tiny
-      // strings through TextDecoder, since .subarray() allocates garbage.
-      // (As a tiny code save trick, compare endPtr against endIdx using a negation,
-      // so that undefined means Infinity)
-      while (heapOrArray[endPtr] && !(endPtr >= endIdx)) ++endPtr;
-  
-      if (endPtr - idx > 16 && heapOrArray.buffer && UTF8Decoder) {
-        return UTF8Decoder.decode(heapOrArray.subarray(idx, endPtr));
-      }
-      var str = '';
-      // If building with TextDecoder, we have already computed the string length
-      // above, so test loop end condition against that
-      while (idx < endPtr) {
-        // For UTF8 byte structure, see:
-        // http://en.wikipedia.org/wiki/UTF-8#Description
-        // https://www.ietf.org/rfc/rfc2279.txt
-        // https://tools.ietf.org/html/rfc3629
-        var u0 = heapOrArray[idx++];
-        if (!(u0 & 0x80)) { str += String.fromCharCode(u0); continue; }
-        var u1 = heapOrArray[idx++] & 63;
-        if ((u0 & 0xE0) == 0xC0) { str += String.fromCharCode(((u0 & 31) << 6) | u1); continue; }
-        var u2 = heapOrArray[idx++] & 63;
-        if ((u0 & 0xF0) == 0xE0) {
-          u0 = ((u0 & 15) << 12) | (u1 << 6) | u2;
-        } else {
-          if ((u0 & 0xF8) != 0xF0) warnOnce('Invalid UTF-8 leading byte ' + ptrToString(u0) + ' encountered when deserializing a UTF-8 string in wasm memory to a JS string!');
-          u0 = ((u0 & 7) << 18) | (u1 << 12) | (u2 << 6) | (heapOrArray[idx++] & 63);
-        }
-  
-        if (u0 < 0x10000) {
-          str += String.fromCharCode(u0);
-        } else {
-          var ch = u0 - 0x10000;
-          str += String.fromCharCode(0xD800 | (ch >> 10), 0xDC00 | (ch & 0x3FF));
-        }
-      }
-      return str;
-    }
   
   
     /**
@@ -3768,7 +3798,7 @@ function dbg(text) {
     }
   
   function abortOnCannotGrowMemory(requestedSize) {
-      abort('Cannot enlarge memory arrays to size ' + requestedSize + ' bytes (OOM). Either (1) compile with -sINITIAL_MEMORY=X with X higher than the current value ' + HEAP8.length + ', (2) compile with -sALLOW_MEMORY_GROWTH which allows increasing the size at runtime, or (3) if you want malloc to return NULL (0) instead of this abort, compile with -sABORTING_MALLOC=0');
+      abort(`Cannot enlarge memory arrays to size ${requestedSize} bytes (OOM). Either (1) compile with -sINITIAL_MEMORY=X with X higher than the current value ${HEAP8.length}, (2) compile with -sALLOW_MEMORY_GROWTH which allows increasing the size at runtime, or (3) if you want malloc to return NULL (0) instead of this abort, compile with -sABORTING_MALLOC=0`);
     }
   function _emscripten_resize_heap(requestedSize) {
       var oldSize = HEAPU8.length;
@@ -3874,6 +3904,7 @@ function dbg(text) {
   }
 
 
+
   var FSNode = /** @constructor */ function(parent, name, mode, rdev) {
     if (!parent) {
       parent = this;  // root node sets parent to itself
@@ -3919,6 +3950,7 @@ function dbg(text) {
    }
   });
   FS.FSNode = FSNode;
+  FS.createPreloadedFile = FS_createPreloadedFile;
   FS.staticInit();Module["FS_createPath"] = FS.createPath;Module["FS_createDataFile"] = FS.createDataFile;Module["FS_createPreloadedFile"] = FS.createPreloadedFile;Module["FS_unlink"] = FS.unlink;Module["FS_createLazyFile"] = FS.createLazyFile;Module["FS_createDevice"] = FS.createDevice;;
 ERRNO_CODES = {
       'EPERM': 63,
@@ -4195,10 +4227,10 @@ Module["addRunDependency"] = addRunDependency;
 Module["removeRunDependency"] = removeRunDependency;
 Module["FS_createPath"] = FS.createPath;
 Module["FS_createDataFile"] = FS.createDataFile;
-Module["FS_createPreloadedFile"] = FS.createPreloadedFile;
 Module["FS_createLazyFile"] = FS.createLazyFile;
 Module["FS_createDevice"] = FS.createDevice;
 Module["FS_unlink"] = FS.unlink;
+Module["FS_createPreloadedFile"] = FS.createPreloadedFile;
 var missingLibrarySymbols = [
   'exitJS',
   'emscripten_realloc_buffer',
@@ -4448,6 +4480,9 @@ var unexportedSymbols = [
   'exceptionCaught',
   'Browser',
   'wget',
+  'preloadPlugins',
+  'FS_modeStringToFlags',
+  'FS_getMode',
   'FS',
   'MEMFS',
   'TTY',

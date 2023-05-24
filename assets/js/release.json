@@ -30,7 +30,7 @@
         "#Facebook": "粉絲專頁",
         "#Youtube": "頻道頁面",
         "#release_page": "版本紀錄",
-        "#log_sign_page": "登入/註冊"
+        "#new_Calculator": "2.0 計算機"
      },
       "en": {
         "#release_note": "Release Note",
@@ -59,7 +59,7 @@
         "#Facebook": "Facebook",
         "#Youtube": "Youtube",
         "#release_page": "Release Note",
-        "#log_sign_page": "Log/Sign in"
+        "#new_Calculator": "2.0 Calculator"
       }
     }
   }
