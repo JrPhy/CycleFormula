@@ -6,8 +6,7 @@
 -->
 <html>
 	<head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<title >平路路段計算機 Flat Segment Calculator</title>
+		<title> 路段最佳配瓦計算機 Optimal Power Segment Calculator</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="用理論計算來分析單車運動，爬坡路段計算機幫助你計算爬武嶺的目標做功與均瓦" />
@@ -16,10 +15,9 @@
 		<meta property="og:url" content="https://jrphy.github.io/CycleFormula/" />
 		<meta property="og:image:secure_url" content="https://github.com/JrPhy/CycleFormula/blob/main/images/Cycle_Formula.jpg" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-    	<meta name="referrer" content="no-referrer-when-downgrade">
-		<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6262285358359079"
-     	crossorigin="anonymous"></script>
+		<meta name="referrer" content="no-referrer-when-downgrade">
+		<!--<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6262285358359079"
+		crossorigin="anonymous"></script>
 		<script async src="https://www.googletagmanager.com/gtag/js?id=G-FZLKEEEQYS"></script>
 		<script>
 		var doNotTrack = false;
@@ -29,14 +27,13 @@
 			gtag('js', new Date());
 			gtag('config', 'G-FZLKEEEQYS', { 'anonymize_ip': false });
 		}
-		</script>
+		</script>-->
 		<script src="assets/js/getData.js"></script>
-		<script src="assets/js/CycleFormula.js"></script>
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/langSwitcher.js"></script>
 		<script>
 			$(document).ready(function(){
-				$.MultiLanguage('assets/js/TTCal.json');
+				$.MultiLanguage('assets/js/bestSegTime.json');
 			})
 		</script>
 	</head>
@@ -61,11 +58,11 @@
 									<div class="content">
 										<header>
 											<p>
-												<button onclick="$.MultiLanguage('assets/js/TTCal.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
-												<button onclick="$.MultiLanguage('assets/js/TTCal.json', 'en')" class="btn">English</button>
+												<button onclick="$.MultiLanguage('assets/js/bestSegTime.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+												<button onclick="$.MultiLanguage('assets/js/bestSegTime.json', 'en')" class="btn">English</button>
 											</p>
-											<h1 id="TTCal"></h1>
-											<h3 id="TTCalHowToUse"></h3>
+											<h1 id="bestSegTime"></h1>
+											<h3 id="bestSegTimeHowToUse"></h3>
 										</header>
 										<form name="form" id="form" method=post>
 											<script>
@@ -142,16 +139,20 @@
 												
 													<input type="radio" name="pose" id="TTPose" value="2">
 													<label for="TTPose"><h4 id="TTP"></h4></label>
-													<!--<input type="radio" name="pose" id="UPP" value="0" onclick="position('UPP');">
-													<label for="UPP">一般</label>
-												
-													<input type="radio" name="pose" id="DPP" value="1" checked onclick="position('DPP');">
-													<label for="DPP">空力</label>
-												
-													<input type="radio" name="pose" id="TTP" value="2" onclick="position('TPP');">
-													<label for="TTP">計時</label>-->
 												  </td>
 											  </tr>
+											  <tr>
+												<td><h4 id="tyre"></h4>
+												<input type="radio" name="tyre" id="clincherTyre" value="0">
+												<label for="clincherTyre"><h4 id="clincher"></h4></label>
+											
+												<input type="radio" name="tyre" id="tubulessTyre" value="1" checked>
+												<label for="tubulessTyre"><h4 id="tubuless"></h4></label>
+											
+												<input type="radio" name="tyre" id="tubularTyre" value="2">
+												<label for="tubularTyre"><h4 id="tubular"></h4></label>
+												</td>
+											</tr>	
 											  <tr>
 												<td><h4 id="deep"></h4> 
 												  <select name="deep" id="deep" style="color:#000000">
@@ -162,34 +163,39 @@
 													<option value="4" id="disk">碟輪</option>
 													</select>
 												<br></td>
-												<td><h4 id="route"></h4> <select name="route" style="color:#000000">
-													<option value="4" >4 km</option>
-													<option value="8" >8 km</option>
-													<option value="10" >10 km</option>
-													<option value="16" >16 km</option>
-													<option value="20" selected>20 km</option>
-													<option value="40" >40 km</option>
-													<option value="45" >45 km</option>
-													<option value="90" >90 km</option>
+												<td><h4 id="route"></h4> <select name="route" onchange = "select_route()" style="color:#000000">
+													<option value="5" selected> 136 </option>
+													<option value="6" > 佛陀關西上 </option>
+													<option value="7" > 宇老內灣上 </option>
 													</select>
 												<br></td>
 											  </tr>
 											  <tr>
-												<td><h4 id="time"></h4> <input type="text" value = "0:30:00" name="time" style="color:#000000"><br></td>
-												<td><h4 id="draftTime"></h4> <input type="text" value = "0" name="draftTime" style="color:#000000", disabled><br></td>
-											  </tr>
-											  <tr>
-												<td><input type="button" value="計算/Calculate" onclick="TTCal(this.form)"></td>
-												
-											  </tr>
-											  <tr>
-												<td><h4 id="WORK"></h4> <input type="text" name="WORK" readonly style="color:#000000"></td>
+												<td><h4 id="time"></h4> <input type="text" value = "0:40:00" name="time" style="color:#000000"><br></td>
 												<td><h4 id="Pavg"></h4> <input type="text" name="Pavg" readonly style="color:#000000"></td>
+											  </tr>
+											  <tr>
+												<div class="editview-product-box">
+													<div class="editview-radio-box">
+													</div>
+												</div>
+											<tr>
+												<td><h4 id="opt_time"></h4> <input type="text" name="opt_time" readonly style="color:#000000"><br></td>
+												<td><h4 id="time_save"></h4> <input type="text" name="time_save" readonly style="color:#000000"><br></td>
+											</tr>
+											<tr>
+												<td><h4 id="P_1st_seg"></h4> <input type="text" name="P_1st_seg" readonly style="color:#000000"><br></td>
+												<td><h4 id="P_2nd_seg"></h4> <input type="text" name="P_2nd_seg" readonly style="color:#000000"></td>
+											  </tr>
+											  <tr>
+												<td><h4 id="T_1st_seg"></h4> <input type="text" name="T_1st_seg" readonly style="color:#000000"><br></td>
+												<td><h4 id="T_2nd_seg"></h4> <input type="text" name="T_2nd_seg" readonly style="color:#000000"></td>
 											  </tr>
 											</table>
 										  </form>
+										  <div class="msg_desc"><img src="images/136.jpg" style="max-width:100%;overflow:hidden;" name="route_pic"></div>
 									</div>
-								</section>  
+								</section>
 								<p style="color:#aaaaaa" id="license"></p>
 								<p class="copyright" id="copyright" style="color:#aaaaaa">&copy; </p>
 								<div class="post__meta meta">
@@ -215,26 +221,26 @@
                             <h2 id="menu_page"></h2>
                           </header>
                           <ul>
-							<li><a href="index.html"><h3 id="index"></h3></a></li>
-							<li><a href="https://operftrain.com/author/login"><h3 id="new_Calculator"></h3></a></li>
-							<li><a href="customer_routeCal.html"><h2 id="new_routeCal_page"></h2></a></li>
-							<li><a href="customer_bestSegTime.html"><h2 id="bestSegTime_page"></h2></a></li>
-							<li><a href="customer_routeSegCal.html"><h2 id="routeSegCal_page"></h2></a></li>
-							<li><a href="route_cal.html"><h3 id="routeCal_page"></h3></a></li>
-							<li><a href="TT_cal.html"><h3 id="TTCal_page"></h3></a></li>
+                            <li><a href="index.html"><h3 id="index"></h3></a></li>
+                            <li><a href="customer_routeCal.html"><h2 id="new_routeCal_page"></h2></a></li>
+                            <li><a href="customer_bestSegTime.html"><h2 id="bestSegTime_page"></h2></a></li>
+                            <li><a href="customer_routeSegCal.html"><h2 id="routeSegCal_page"></h2></a></li>
+                            <li><a href="route_cal.html"><h3 id="routeCal_page"></h3></a></li>
+                  			<li><a href="TT_cal.html"><h3 id="TTCal_page"></h3></a></li>
 							<li><a href="AtoW.html"><h3 id="AtoW_page"></h3></a></li>
 							<li><a href="CP_and_Wprime.html"><h3 id="CPWPrime_page"></h3></a></li>
 							<li><a href="LE8.html"><h3 id="LE8_page"></h3></a></li>
-							<li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3 id="blog"></h3></a></li>
-							<li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3 id="Facebook"></h3></a></li>
-							<li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3 id="Youtube"></h3></a></li>
+                            <li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3 id="blog"></h3></a></li>
+                            <li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3 id="Facebook"></h3></a></li>
+                            <li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3 id="Youtube"></h3></a></li>
 							<li><a href="release_note.html"><h3 id="release_page"></h3></a></li>
-						  </ul>
+							<li><a href="https://operftrain.com/author/login"><h3 id="new_Calculator"></h3></a></li>
+                          </ul>
                         </nav>
                       <!-- Footer -->
                         <footer id="footer">
-                          	<p class="copyright">&copy; 網頁樣板: <a href="https://html5up.net/editorial">editorial</a>. Design: <a href="https://html5up.net/editorial">HTML5 UP</a>.</p>
-                        	<p class="copyright">&copy; 內容與算法: 單車新幹線Cycle Formula</p>
+                          	<p class="copyright">&copy;<a href="https://html5up.net/editorial">editorial</a>. Design: <a href="https://html5up.net/editorial">HTML5 UP</a>.</p>
+							<p class="copyright" style="color:#aaaaaa">&copy;單車新幹線 Cycle Formula </p>
                         </footer>
                     </div>
                   </div>
@@ -245,6 +251,5 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
 	</body>
 </html>

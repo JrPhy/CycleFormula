@@ -92,6 +92,16 @@ function LE8Cal(form)
     }
 }
 
+function select_route() {
+    var route_pic = document.route_pic;
+    var route = document.form.route.value;
+
+    if(route == 5)
+        route_pic.src = "images/136.jpg";
+    else if (route == 6)
+        route_pic.src = "images/buddiha_south.jpg";
+}
+
 function TTCal(form)
 {
     const forms = document.forms['form'];

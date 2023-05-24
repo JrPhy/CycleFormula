@@ -21,6 +21,9 @@
  
         "#menu_page": "選單",
         "#index": "首頁",
+        "#new_routeCal_page": "2.0 路段計算機 (範例)",
+        "#routeSegCal_page": "路段分段計算機 (範例)",
+        "#bestSegTime_page": "路段最佳配瓦計算機(範例)",
         "#routeCal_page": "爬坡做功計算機",
         "#TTCal_page": "平路做功計算機",
         "#AtoW_page": "風阻轉重量計算機",
@@ -30,7 +33,7 @@
         "#Facebook": "粉絲專頁",
         "#Youtube": "頻道頁面",
         "#release_page": "版本紀錄",
-        "#new_Calculator": "2.0 計算機"
+        "#new_Calculator": "2.0 計算機 (連結)"
      },
       "en": {
         "#release_note": "Release Note",
@@ -48,8 +51,11 @@
         "#copyright": "Content and algorithm: 單車新幹線 Cycle Formula",
         "#view": "View",
 
-        "#menu_page": "Menu",
         "#index": "Index",
+        "#menu_page": "Menu",
+        "#new_routeCal_page": "2.0 Route Calculator (DEMO)",
+        "#routeSegCal_page": "Route Segment Calculator (DEMO)",
+        "#bestSegTime_page": "Optimal Power Segment Calculator ",
         "#routeCal_page": "Climb Segment Calculator",
         "#TTCal_page": "Flat Segment Calculator",
         "#AtoW_page": "Aero to Weight Calculator",
@@ -59,7 +65,7 @@
         "#Facebook": "Facebook",
         "#Youtube": "Youtube",
         "#release_page": "Release Note",
-        "#new_Calculator": "2.0 Calculator"
+        "#new_Calculator": "2.0 Calculator (LINK)"
       }
     }
   }
