@@ -76,6 +76,11 @@
 												document.getElementById("TTPose").checked = true;
 												document.querySelector('#deep [value="' + '4' + '"]').selected = true;
 											}
+											function gotoNewCalclator()
+											{
+												if (!confirm("請至 2.0 計算機註冊使用，粉絲專頁有活動\n Use it in new_Calculator, there is a activity in fan page.")) 
+												{return;}
+											}
 											</script>
 											<table style="color:#aaaaaa">
 												<table>
@@ -200,7 +205,7 @@
 															<div class="editview-radio-box">
 															</div>
 														</div>
-														<td><br><input type="button" value="計算/Calculate" id="Calculate"></td>
+														<td><br><input type="button" value="計算/Calculate" id="Calculate" onclick="gotoNewCalclator()"></td>
 														<td><h4 id="Remain"></h4> <input type="text" value = "消耗/consume 1 " name="Remain" readonly style="color:#000000"></td>
 														<td><h4 id="WORK"></h4> <input type="text" name="WORK" readonly style="color:#000000"></td>
 														<td><h4 id="Pavg"></h4> <input type="text" name="Pavg" readonly style="color:#000000"></td>

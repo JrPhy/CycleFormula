@@ -77,6 +77,11 @@
 												document.getElementById("TTPose").checked = true;
 												document.querySelector('#deep [value="' + '4' + '"]').selected = true;
 											}
+											function gotoNewCalclator()
+											{
+												if (!confirm("請至 2.0 計算機註冊使用，粉絲專頁有活動\n Use it in new_Calculator, there is a activity in fan page.")) 
+												{return;}
+											}
 											function select_route() {
 												var route_pic = document.route_pic;
 												var route = document.form.route.value;
@@ -193,7 +198,7 @@
 													<td><h4 id="segment"></h4><input type="text" name="segment" value = "昆陽-武嶺  2.11 km/174 m" readonly style="color:#000000"><br></td>
 												</tr>
 												<tr>
-													<th><br><input type="button" value="計算/Cal"></th>
+													<th><br><input type="button" value="計算/Cal" onclick="gotoNewCalclator()"></th>
 													<th><h4 id="Remain"></h4> <input type="text" value = "消耗/consume 1 " name="Remain" readonly style="color:#000000"></th>
 													<th><h4 id="recommand_gear"></h4> <input type="text" name="recommand_gear" readonly style="color:#000000"></th>
 												</tr>
