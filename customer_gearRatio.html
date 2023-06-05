@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title> 路段最佳配瓦計算機 Optimal Power Segment Calculator</title>
+		<title> 路段齒比計算機 Optimal Gear Ratio Calculator</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="用理論計算來分析單車運動，爬坡路段計算機幫助你計算爬武嶺的目標做功與均瓦" />
@@ -28,12 +28,11 @@
 			gtag('config', 'G-FZLKEEEQYS', { 'anonymize_ip': false });
 		}
 		</script>
-		<script src="assets/js/getData.js"></script>
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/langSwitcher.js"></script>
 		<script>
 			$(document).ready(function(){
-				$.MultiLanguage('assets/js/bestSegTime.json');
+				$.MultiLanguage('assets/js/gearRatio.json');
 			})
 		</script>
 	</head>
@@ -58,15 +57,12 @@
 									<div class="content">
 										<header>
 											<p>
-												<button onclick="$.MultiLanguage('assets/js/bestSegTime.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
-												<button onclick="$.MultiLanguage('assets/js/bestSegTime.json', 'en')" class="btn">English</button>
+												<button onclick="$.MultiLanguage('assets/js/gearRatio.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+												<button onclick="$.MultiLanguage('assets/js/gearRatio.json', 'en')" class="btn">English</button>
 											</p>
-											<h1 id="bestSegTime"></h1>
-											<h3 id="bestSegTimeHowToUse"></h3>
+											<h1 id="gearRatio"></h1>
+											<h3 id="gearRatioHowToUse"></h3>
 										</header>
-										<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-											<iframe src="https://www.youtube.com/embed/-y0afS6htbc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
-										  </div>
 										<form name="form" id="form" method=post>
 											<script>
 											function TimeTrailBike() 
@@ -78,21 +74,31 @@
 												document.getElementById("TTPose").checked = true;
 												document.querySelector('#deep [value="' + '4' + '"]').selected = true;
 											}
+											function select_route() {
+												var route_pic = document.route_pic;
+												var route = document.form.route.value;
+
+												if(route == 0)
+													document.form.segment.value = "昆陽-武嶺  2.11 km/174 m";
+												else if (route == 1)
+													document.form.segment.value = "大禹嶺-牌樓  10.20 km/750 m";
+											}
+											</script>
 											</script>
 											<table style="color:#aaaaaa">
 												<table>
 													<tr>
-														<th><h4 id="riderMass"></h4> <input type="number" value="70" name="riderMass"><br></th>
-														<th><h4 id="bikeMass"></h4> <input type="number" value="7" name="bikeMass"><br></th>
-														<th><h4 id="equipMass"></h4> <input type="number" value="1" name="equipMass"><br></th>
+														<td><h4 id="riderMass"></h4> <input type="number" value="70" name="riderMass"></td>
+														<td><h4 id="bikeMass"></h4> <input type="number" value="7" name="bikeMass"></td>
 													</tr>
 													<tr>
-														<th><h4 id="windDirect"></h4> <input type="number" value="0" name="windSpeed"><br></th>
-														<th><h4 id="waterMass"></h4> <input type="number" value="1" name="waterMass"><br></th>
-														<th><h4 id="foodMass"></h4> <input type="number" value="0" name="foodMass"><br></th>
+														<td><h4 id="equipMass"></h4> <input type="number" value="1" name="equipMass"></td>
+														<td><h4 id="windDirect"></h4> <input type="number" value="0" name="windSpeed"><br></td>
 													</tr>
-												</table>
-												<table>
+													<tr>
+														<td><h4 id="waterMass"></h4> <input type="number" value="1" name="waterMass"><br></td>
+														<td><h4 id="foodMass"></h4> <input type="number" value="0" name="foodMass"><br></td>
+													</tr>
 													<tr>
 														<td><h4 id="bike"></h4>
 															<input type="radio" name="bike" id="ClimbBi" value="0">
@@ -156,8 +162,13 @@
 														<input type="radio" name="tyre" id="tubularTyre" value="2">
 														<label for="tubularTyre"><h4 id="tubular"></h4></label>
 														</td>
+														<td><h4 id="power"></h4> <input type="number" value="200" name="power"><br></td>
+													</tr>	
+													<tr>
+														<td><h4 id="RPM"></h4> <input type="number" value="80" name="RPM"><br></td>
+														<td><h4 id="FC"></h4> <input type="number" value="34" name="FC"><br></td>
 													</tr>
-												</table>	
+												</table>
 												<table>
 													<tr>
 														<td><h4 id="deep"></h4> 
@@ -170,98 +181,84 @@
 															</select>
 														<br></td>
 														<td><h4 id="route"></h4> <select name="route" onchange = "select_route()" style="color:#000000">
-															<option value="5" selected> 136 </option>
-															<option value="6" > 佛陀關西上 </option>
-															<option value="7" > 宇老內灣上 </option>
+															<option value="0" id="west-Wuling" selected> </option>
+															<option value="1" id="east-Wuling" > </option>
+															<option value="2" id="Mt-TaiPing" disabled> </option>
+															<option value="3" id="TATAKA" disabled> </option>
 															</select>
 														<br></td>
-														<td><h4 id="time"></h4> <input type="text" value = "0:40:00" name="time" style="color:#000000"><br></td>
-													</tr>
-													<tr>
-														<td><br><input type="button" value="計算/Calculate" id="Calculate"></td>
-														<td><h4 id="Pavg"></h4> <input type="text" name="Pavg" readonly style="color:#000000"></td>
-														<td><h4 id="Remain"></h4> <input type="text" value = "消耗/consume 3 " name="Remain" readonly style="color:#000000"></td>
-													</tr>
-													<tr>
-														<div class="editview-product-box">
-															<div class="editview-radio-box">
-															</div>
-														</div>
-													<tr>
-														<td><h4 id="opt_time"></h4> <input type="text" name="opt_time" readonly style="color:#000000"><br></td>
-														<td><h4 id="T_1st_seg"></h4> <input type="text" name="T_1st_seg" readonly style="color:#000000"><br></td>
-														<td><h4 id="T_2nd_seg"></h4> <input type="text" name="T_2nd_seg" readonly style="color:#000000"></td>
-													</tr>
-													<tr>	
-														<td><h4 id="time_save"></h4> <input type="text" name="time_save" readonly style="color:#000000"><br></td>
-														<td><h4 id="P_1st_seg"></h4> <input type="text" name="P_1st_seg" readonly style="color:#000000"><br></td>
-														<td><h4 id="P_2nd_seg"></h4> <input type="text" name="P_2nd_seg" readonly style="color:#000000"></td>
-													</tr>
-												</table>
+													<td><h4 id="segment"></h4><input type="text" name="segment" value = "昆陽-武嶺  2.11 km/174 m" readonly style="color:#000000"><br></td>
+												</tr>
+												<tr>
+													<th><br><input type="button" value="計算/Cal"></th>
+													<th><h4 id="Remain"></h4> <input type="text" value = "消耗/consume 1 " name="Remain" readonly style="color:#000000"></th>
+													<th><h4 id="recommand_gear"></h4> <input type="text" name="recommand_gear" readonly style="color:#000000"></th>
+												</tr>
+											  </table>
 											</table>
 										  </form>
-										  <div class="msg_desc"><img src="images/136.jpg" style="max-width:100%;overflow:hidden;" name="route_pic"></div>
 									</div>
 								</section>
-								<p style="color:#aaaaaa" id="license"></p>
-								<p class="copyright" id="copyright" style="color:#aaaaaa">&copy; </p>
-								<div class="post__meta meta">
-									<span id="busuanzi_container_page_pv" style="color:#aaaaaa"><h5 id="view"></h5><span id="busuanzi_value_page_pv"></span></span>
-								</div>
-						</div>
+							<p style="color:#aaaaaa" id="license"></p>
+							<p class="copyright" id="copyright" style="color:#aaaaaa">&copy; </p>
+							<div class="post__meta meta">
+								<span id="busuanzi_container_page_pv" style="color:#aaaaaa"><h5 id="view"></h5><span id="busuanzi_value_page_pv"></span></span>
+							</div>
 					</div>
+				</div>
 
-				<!-- Sidebar -->
-                <div id="sidebar">
-                    <div class="inner">
-          
-                      <!-- Search -->
-                        <section id="search" class="alt">
-                          <form method="post" action="#">
-                            <input type="text" name="query" id="query" placeholder="Search" />
-                          </form>
-                        </section>
-          
-                      <!-- Menu -->
-                        <nav id="menu">
-                          <header class="major">
-                            <h2 id="menu_page"></h2>
-                          </header>
-                          <ul>
-							<li><a href="index.html"><h3 id="index"></h3></a></li>
-							<li>
-								<span class="opener"><h2 id="new_Calculator"></h2></span>
-								<ul>
-									<li><a href="https://operftrain.com/author/login"><h2>連結/Link</h2></a></li>
-									<li><a href="customer_routeCal.html"><h2 id="new_routeCal_page"></h2></a></li>
-									<li><a href="customer_bestSegTime.html"><h2 id="bestSegTime_page"></h2></a></li>
-									<li><a href="customer_routeSegCal.html"><h2 id="routeSegCal_page"></h2></a></li>
-									<li><a href="customer_gearRatio_page.html"><h2 id="gearRatio_page"></h2></a></li>
-								</ul>
-							</li>
-							<li><a href="route_cal.html"><h3 id="routeCal_page"></h3></a></li>
-							<li><a href="TT_cal.html"><h3 id="TTCal_page"></h3></a></li>
-							<li><a href="AtoW.html"><h3 id="AtoW_page"></h3></a></li>
-							<li><a href="CP_and_Wprime.html"><h3 id="CPWPrime_page"></h3></a></li>
-							<li><a href="LE8.html"><h3 id="LE8_page"></h3></a></li>
-							<li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3 id="blog"></h3></a></li>
-							<li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3 id="Facebook"></h3></a></li>
-							<li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3 id="Youtube"></h3></a></li>
-							<li><a href="release_note.html"><h3 id="release_page"></h3></a></li>
-                        </nav>
-                      <!-- Footer -->
-                        <footer id="footer">
-                          	<p class="copyright">&copy;<a href="https://html5up.net/editorial">editorial</a>. Design: <a href="https://html5up.net/editorial">HTML5 UP</a>.</p>
-							<p class="copyright" style="color:#aaaaaa">&copy;單車新幹線 Cycle Formula </p>
-                        </footer>
-                    </div>
-                  </div>
-              </div>
+			<!-- Sidebar -->
+			<div id="sidebar">
+				<div class="inner">
+	  
+				  <!-- Search -->
+					<section id="search" class="alt">
+					  <form method="post" action="#">
+						<input type="text" name="query" id="query" placeholder="Search" />
+					  </form>
+					</section>
+	  
+				  <!-- Menu -->
+					<nav id="menu">
+					  <header class="major">
+						<h2 id="menu_page"></h2>
+					  </header>
+					  <ul>
+						<li><a href="index.html"><h3 id="index"></h3></a></li>
+						<li>
+							<span class="opener"><h2 id="new_Calculator"></h2></span>
+							<ul>
+								<li><a href="https://operftrain.com/author/login"><h2>連結/Link</h2></a></li>
+								<li><a href="customer_routeCal.html"><h2 id="new_routeCal_page"></h2></a></li>
+								<li><a href="customer_bestSegTime.html"><h2 id="bestSegTime_page"></h2></a></li>
+								<li><a href="customer_routeSegCal.html"><h2 id="routeSegCal_page"></h2></a></li>
+								<li><a href="customer_gearRatio_page.html"><h2 id="gearRatio_page"></h2></a></li>
+							</ul>
+						</li>
+						<li><a href="route_cal.html"><h3 id="routeCal_page"></h3></a></li>
+						<li><a href="TT_cal.html"><h3 id="TTCal_page"></h3></a></li>
+						<li><a href="AtoW.html"><h3 id="AtoW_page"></h3></a></li>
+						<li><a href="CP_and_Wprime.html"><h3 id="CPWPrime_page"></h3></a></li>
+						<li><a href="LE8.html"><h3 id="LE8_page"></h3></a></li>
+						<li><a href="https://jrphy.github.io/blog/" Target="_blank"><h3 id="blog"></h3></a></li>
+						<li><a href="https://www.facebook.com/CycleFormula" Target="_blank"><h3 id="Facebook"></h3></a></li>
+						<li><a href="https://www.youtube.com/channel/UCei7UffxFMaYKRgmO-GsMRQ" Target="_blank"><h3 id="Youtube"></h3></a></li>
+						<li><a href="release_note.html"><h3 id="release_page"></h3></a></li>
+					  </ul>
+					</nav>
+				  <!-- Footer -->
+					<footer id="footer">
+						  <p class="copyright">&copy;<a href="https://html5up.net/editorial">editorial</a>. Design: <a href="https://html5up.net/editorial">HTML5 UP</a>.</p>
+						<p class="copyright" style="color:#aaaaaa">&copy;單車新幹線 Cycle Formula </p>
+					</footer>
+				</div>
+			  </div>
+		  </div>
 
-		<!-- Scripts -->
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-	</body>
+	<!-- Scripts -->
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+</body>
 </html>
