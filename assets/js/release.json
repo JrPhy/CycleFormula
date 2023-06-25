@@ -14,6 +14,8 @@
         "#1_3_1": "1.3.1 加入空力車讓計算更準",
         "#1_3_2": "1.3.2 新增 Inthanon 和雲頂高原",
         "#1_4_0": "1.4.0 新增 CP/CV 與 W' 計算機",
+        "#1_4_1": "1.4.1 新增 妙峰山、云台山、谭王路",
+        "#1_4_2": "1.4.2 新增 136, 宇老跟佛陀關西上",
 
         "#license": "License 時間 2023/06/30 23:59:59 GMT+08:00",
         "#copyright": "內容與算法: 單車新幹線 Cycle Formula",
@@ -46,7 +48,8 @@
         "#1_3_0": "1.3.0 Add English",
         "#1_3_1": "1.3.1 Add Aerobike for more accurate",
         "#1_3_2": "1.3.2 Add Inthanon and Genting Highlands",
-        "#1_4_0": "1.4.0 Add CP/CV and W' Calculator",
+        "#1_4_1": "1.4.1 新增 妙峰山、云台山、谭王路",
+        "#1_4_2": "1.4.2 Add 136, Buddiha south and Yulao",
         
         "#license": "License expire 2023/06/30 23:59:59 GMT+08:00",
         "#copyright": "Content and algorithm: 單車新幹線 Cycle Formula",

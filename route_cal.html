@@ -72,6 +72,40 @@
 											<iframe src="https://www.youtube.com/embed/XZZj8-7iMOg" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 										  </div>
 										<form name="form" id="form" method=post>
+											<script>
+											function selectRoute(form)
+											{
+												var route = document.form.route.value;
+												if(route == 0)
+												{document.form.segment.value = "中心碑 - 武嶺牌樓"}
+												else if(route == 1)
+												{document.form.segment.value = "太魯閣牌樓 - 武嶺牌樓"}
+												else if(route == 2)
+												{document.form.segment.value = "土場 - 見晴古道"}
+												else if(route == 3)
+												{document.form.segment.value = "龍神橋 - 遊客中心"}
+												else if(route == 5)
+												{document.form.segment.value = "萊爾富 - 赤崁頂"}
+												else if(route == 6)
+												{document.form.segment.value = "左轉 - 停車場大石頭"}
+												else if(route == 7)
+												{document.form.segment.value = "竹60 - 叉路"}
+												else if(route == 10)
+												{document.form.segment.value = "Bedoin - Top"}
+												else if(route == 11)
+												{document.form.segment.value = "北麓公園 - 五合目"}
+												else if(route == 12)
+												{document.form.segment.value = "Chom Thom - Top"}
+												else if(route == 13)
+												{document.form.segment.value = "Batang Kali - Top"}
+												else if(route == 50)
+												{document.form.segment.value = "楼牌 - 停车场"}
+												else if(route == 51)
+												{document.form.segment.value = "?? - ??"}
+												else if(route == 52)
+												{document.form.segment.value = "小桥 - 12.5Km"}
+											}
+											</script>
 											<table style="color:#aaaaaa">
 											  <tr>
 												<td><h4 id="riderMass"></h4> <input type="number" value="70" name="riderMass"><br></td>
@@ -92,12 +126,15 @@
 											  </tr>
 											  <tr>
 												<td><h4 id="time"></h4> <input type="text" value = "3:00:00" name="time" style="color:#000000"><br></td>
-												<td><h4 id="route"></h4> <select name="route" style="color:#000000">
+												<td><h4 id="route"></h4> <select name="route" onchange = "selectRoute()" style="color:#000000">
 													<option value="0" id="west-Wuling"> </option>
 													<option value="1" id="east-Wuling"> </option>
 													<option value="2" id="Mt-TaiPing"> </option>
-													<option value="3" id="TATAjia"> </option>
+													<option value="3" id="TATAKA"> </option>
 													<option value="4" id="Mt-Plum" disabled> </option>
+													<option value="5" id="136"> </option>
+													<option value="6" id="Buddiha_south"> </option>
+													<option value="7" id="Yulao"> </option>
 													<option value="10" id="Mt-Ventoux"> </option>
 													<option value="11" id="Mt-Fuji"> </option>
 													<option value="12" id="Inthanon"> </option>
