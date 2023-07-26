@@ -64,35 +64,69 @@
 										</header>
 										<form name="form" id="form" method=post>
 											<script>
-											function TimeTrailBike() 
-											{
-												document.getElementById("Bar").checked = true;
-												document.getElementById("Skinsuit").checked = true;
-												document.getElementById("SockCover").checked = true;
-												document.getElementById("TTHel").checked = true;
-												document.getElementById("TTPose").checked = true;
-												document.querySelector('#deep [value="' + '4' + '"]').selected = true;
-											}
-											function gotoNewCalclator()
-											{
-												if (!confirm("請至 2.0 計算機註冊使用，粉絲專頁有活動\n Use it in new_Calculator, there is a activity in fan page.")) 
-												{return;}
-											}
-											</script>
+												function TimeTrailBike() 
+												{
+													document.getElementById("Bar").checked = true;
+													document.getElementById("Skinsuit").checked = true;
+													document.getElementById("SockCover").checked = true;
+													document.getElementById("TTHel").checked = true;
+													document.getElementById("TTPose").checked = true;
+													document.querySelector('#deep [value="' + '4' + '"]').selected = true;
+												}
+												function Buy()
+												{
+													if (!confirm("註冊後私訊粉專購買點數使用\n Register and buy points by PM fan page to use")) 
+													{return;}
+												}
+												function selectAll(){
+													var allCheckbox = document.getElementsByClassName("360_520_km_draft");
+													for(var i=0;i<allCheckbox.length;i++){
+														allCheckbox[i].checked = true;
+													}
+												}
+												function unSelectAll(){
+													var allCheckbox = document.getElementsByClassName("360_520_km_draft");
+													for(var i=0;i<allCheckbox.length;i++){
+														allCheckbox[i].checked = false;
+													}
+												}
+												</script>
+												<script type="text/javascript">
+												function showTable() {
+													var tableSelect = document.getElementsByName("route")[0];
+													var table1 = document.getElementById("west_Wuling");
+													var table2 = document.getElementById("east_Wuling");
+													var table3 = document.getElementById("360_520_km");
+													if (tableSelect.value == "0") {
+														table1.style.display = "block";
+														table2.style.display = "none";
+														table3.style.display = "none";
+													} else if (tableSelect.value == "1") {
+														table1.style.display = "none";
+														table2.style.display = "block";
+														table3.style.display = "none";
+													}
+													else if (tableSelect.value == "6") {
+														table1.style.display = "none";
+														table2.style.display = "none";
+														table3.style.display = "block";
+													}
+												}
+												</script>
 											<table style="color:#aaaaaa">
 												<table>
 													<tr>
-														<th><h4 id="riderMass"></h4> <input type="number" value="70" name="riderMass"><br></th>
-														<th><h4 id="bikeMass"></h4> <input type="number" value="7" name="bikeMass"><br></th>
-														<th><h4 id="equipMass"></h4> <input type="number" value="1" name="equipMass"><br></th>
+														<td><h4 id="riderMass"></h4> <input type="number" value="70" name="riderMass"></td>
+														<td><h4 id="bikeMass"></h4> <input type="number" value="7" name="bikeMass"></td>
 													</tr>
 													<tr>
-														<th><h4 id="windDirect"></h4> <input type="number" value="0" name="windSpeed"><br></th>
-														<th><h4 id="waterMass"></h4> <input type="number" value="1" name="waterMass"><br></th>
-														<th><h4 id="foodMass"></h4> <input type="number" value="0" name="foodMass"><br></th>
+														<td><h4 id="equipMass"></h4> <input type="number" value="1" name="equipMass"></td>
+														<td><h4 id="windDirect"></h4> <input type="number" value="0" name="windSpeed"><br></td>
 													</tr>
-												</table>
-												<table>
+													<tr>
+														<td><h4 id="waterMass"></h4> <input type="number" value="1" name="waterMass"><br></td>
+														<td><h4 id="foodMass"></h4> <input type="number" value="0" name="foodMass"><br></td>
+													</tr>
 													<tr>
 														<td><h4 id="bike"></h4>
 															<input type="radio" name="bike" id="ClimbBi" value="0">
@@ -167,73 +201,240 @@
 															<option value="4" id="disk">碟輪</option>
 															</select>
 														<br></td>
-														<td><h4 id="route"></h4> <select name="route" style="color:#000000">
+														<td><h4 id="route"></h4> <select name="route" onchange="showTable()" style="color:#000000">
 															<option value="0" id="west-Wuling" selected> </option>
-															<option value="1" id="east-Wuling" disabled> </option>
+															<option value="1" id="east-Wuling" > </option>
 															<option value="2" id="Mt-TaiPing" disabled> </option>
 															<option value="3" id="TATAKA" disabled> </option>
+															<option value="6" id="360-520-km" > 360/520 km </option>
 															</select>
 														<br></td>
 													</tr>
 												</table>
 											  <table>
 												<tr>
-													<th><br><input type="button" value="計算/Calculate" id="Calculate" onclick="gotoNewCalclator()"></th>
-													<th><br><input type="button" value="下載 不消耗/Download WON'T CONSUME" onclick="download()"></th>
+													<th><br><input type="button" value="計算/Cal"  onclick="Buy()"></th>
+													<th><br><input type="button" value="下載/Download" onclick="download()"></th>
 													<th><h4 id="Remain"></h4> <input type="text" value = "消耗/consume 2 " name="Remain" readonly style="color:#000000"></th>
 												</tr>
 											  </table>
-											  <table>
+											  <table id="west_Wuling">
 												<tr>
-												  <th><h3 id="Segment"></h3></th>
-												  <th><h3 id="Segment_time"></h3></th>
-												  <th><h3 id="Cumulated_time"></h3></th>
-												  <th><h3 id="Segment_power"></h3></th>
+												  <th><h3 id="west_Wuling_Segment"></h3></th>
+												  <th><h3 id="west_Wuling_Segment_time"></h3></th>
+												  <th><h3 id="west_Wuling_Cumulated_time"></h3></th>
+												  <th><h3 id="west_Wuling_Segment_power"></h3></th>
 												</tr>
 												<tr>
-												  <td><input type="checkbox" id="draft" value="1"><label for="draft"><h3 id="west_Wuling_1st_time"></h3></label></td>
-												  <td><input class = "seg_time" type="text" value = "0:35:00" name="west_Wuling_1st_time" style="color:#000000"><br></td>
-												  <td><input class = "cumu_time" type="text" readonly name="west_Wuling_1st_cumu_time" style="color:#000000"><br></td>
-												  <td><input class = "seg_Pavg" type="text" readonly name="west_Wuling_1st_Pavg" readonly style="color:#000000"></td>
+												  <td><input type="checkbox" id="west_Wuling_draft" value="1"><label for="west_Wuling_draft"><h3 id="west_Wuling_1st_time"></h3></label></td>
+												  <td><input class = "west_Wuling_seg_time" type="text" value = "0:35:00" name="west_Wuling_1st_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_cumu_time" type="text" readonly name="west_Wuling_1st_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_seg_Pavg" type="text" readonly name="west_Wuling_1st_Pavg" readonly style="color:#000000"></td>
 												</tr>
 												<tr>
 												  <td><h3 id="west_Wuling_2nd_time"></td>
-												  <td><input class = "seg_time" type="text" value = "0:22:00" name="west_Wuling_2nd_time" style="color:#000000"><br></td>
-												  <td><input class = "cumu_time" type="text" readonly name="west_Wuling_2nd_cumu_time" style="color:#000000"><br></td>
-												  <td><input class = "seg_Pavg" type="text" readonly name="west_Wuling_2nd_Pavg" readonly style="color:#000000"></td>
+												  <td><input class = "west_Wuling_seg_time" type="text" value = "0:22:00" name="west_Wuling_2nd_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_cumu_time" type="text" readonly name="west_Wuling_2nd_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_seg_Pavg" type="text" readonly name="west_Wuling_2nd_Pavg" readonly style="color:#000000"></td>
 												</tr>
 												<tr>
 												  <td><h3 id="west_Wuling_3rd_time"></td>
-												  <td><input class = "seg_time" type="text" value = "0:55:00" name="west_Wuling_3rd_time" style="color:#000000"><br></td>
-												  <td><input class = "cumu_time" type="text" readonly name="west_Wuling_3rd_cumu_time" style="color:#000000"><br></td>
-												  <td><input class = "seg_Pavg" type="text" readonly name="west_Wuling_3rd_Pavg" readonly style="color:#000000"></td>
+												  <td><input class = "west_Wuling_seg_time" type="text" value = "0:55:00" name="west_Wuling_3rd_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_cumu_time" type="text" readonly name="west_Wuling_3rd_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_seg_Pavg" type="text" readonly name="west_Wuling_3rd_Pavg" readonly style="color:#000000"></td>
 												</tr>
 												<tr>
 												  <td><h3 id="west_Wuling_4th_time"></td>
-												  <td><input class = "seg_time" type="text" value = "0:24:00" name="west_Wuling_4th_time" style="color:#000000"><br></td>
-												  <td><input class = "cumu_time" type="text" readonly name="west_Wuling_4th_cumu_time" style="color:#000000"><br></td>
-												  <td><input class = "seg_Pavg" type="text" readonly name="west_Wuling_4th_Pavg" readonly style="color:#000000"></td>
+												  <td><input class = "west_Wuling_seg_time" type="text" value = "0:24:00" name="west_Wuling_4th_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_cumu_time" type="text" readonly name="west_Wuling_4th_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_seg_Pavg" type="text" readonly name="west_Wuling_4th_Pavg" readonly style="color:#000000"></td>
 												</tr>
 												<tr>
 												  <td><h3 id="west_Wuling_5th_time"></td>
-												  <td><input class = "seg_time" type="text" value = "0:34:00" name="west_Wuling_5th_time" style="color:#000000"><br></td>
-												  <td><input class = "cumu_time" type="text" readonly name="west_Wuling_5th_cumu_time" style="color:#000000"><br></td>
-												  <td><input class = "seg_Pavg" type="text" readonly name="west_Wuling_5th_Pavg" readonly style="color:#000000"></td>
+												  <td><input class = "west_Wuling_seg_time" type="text" value = "0:34:00" name="west_Wuling_5th_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_cumu_time" type="text" readonly name="west_Wuling_5th_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_seg_Pavg" type="text" readonly name="west_Wuling_5th_Pavg" readonly style="color:#000000"></td>
 												</tr>
 												<tr>
 												  <td><h3 id="west_Wuling_6th_time"></td>
-												  <td><input class = "seg_time" type="text" value = "0:28:00" name="west_Wuling_6th_time" style="color:#000000"><br></td>
-												  <td><input class = "cumu_time" type="text" readonly name="west_Wuling_6th_cumu_time" style="color:#000000"><br></td>
-												  <td><input class = "seg_Pavg" type="text" readonly name="west_Wuling_6th_Pavg" readonly style="color:#000000"></td>
+												  <td><input class = "west_Wuling_seg_time" type="text" value = "0:28:00" name="west_Wuling_6th_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_cumu_time" type="text" readonly name="west_Wuling_6th_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_seg_Pavg" type="text" readonly name="west_Wuling_6th_Pavg" readonly style="color:#000000"></td>
 												</tr>
 												<tr>
 												  <td><h3 id="west_Wuling_7th_time"></td>
-												  <td><input class = "seg_time" type="text" value = "0:15:00" name="west_Wuling_7th_time" style="color:#000000"><br></td>
-												  <td><input class = "cumu_time" type="text" readonly name="west_Wuling_7th_cumu_time" style="color:#000000"><br></td>
-												  <td><input class = "seg_Pavg" type="text" readonly name="west_Wuling_7th_Pavg" readonly style="color:#000000"></td>
+												  <td><input class = "west_Wuling_seg_time" type="text" value = "0:15:00" name="west_Wuling_7th_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_cumu_time" type="text" readonly name="west_Wuling_7th_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "west_Wuling_seg_Pavg" type="text" readonly name="west_Wuling_7th_Pavg" readonly style="color:#000000"></td>
 												</tr>
 											  </table>
-											</table>
+
+											  <table id="east_Wuling" style="display:none;">
+												<tr>
+												  <th><h3 id="east_Wuling_Segment"></h3></th>
+												  <th><h3 id="east_Wuling_Segment_time"></h3></th>
+												  <th><h3 id="east_Wuling_Cumulated_time"></h3></th>
+												  <th><h3 id="east_Wuling_Segment_power"></h3></th>
+												</tr>
+												<tr>
+												  <td><input type="checkbox" id="east_Wuling_draft" value="1"><label for="east_Wuling_draft"><h3 id="east_Wuling_1st_time"></h3></label></td>
+												  <td><input class = "east_Wuling_seg_time" type="text" value = "0:50:00" name="east_Wuling_1st_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_cumu_time" type="text" readonly name="east_Wuling_1st_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_seg_Pavg" type="text" readonly name="east_Wuling_1st_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+												  <td><h3 id="east_Wuling_2nd_time"></td>
+												  <td><input class = "east_Wuling_seg_time" type="text" value = "1:40:00" name="east_Wuling_2nd_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_cumu_time" type="text" readonly name="east_Wuling_2nd_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_seg_Pavg" type="text" readonly name="east_Wuling_2nd_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+												  <td><h3 id="east_Wuling_3rd_time"></td>
+												  <td><input class = "east_Wuling_seg_time" type="text" value = "0:35:00" name="east_Wuling_3rd_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_cumu_time" type="text" readonly name="east_Wuling_3rd_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_seg_Pavg" type="text" readonly name="east_Wuling_3rd_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+												  <td><h3 id="east_Wuling_4th_time"></td>
+												  <td><input class = "east_Wuling_seg_time" type="text" value = "0:40:00" name="east_Wuling_4th_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_cumu_time" type="text" readonly name="east_Wuling_4th_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_seg_Pavg" type="text" readonly name="east_Wuling_4th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+												  <td><h3 id="east_Wuling_5th_time"></td>
+												  <td><input class = "east_Wuling_seg_time" type="text" value = "0:08:00" name="east_Wuling_5th_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_cumu_time" type="text" readonly name="east_Wuling_5th_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_seg_Pavg" type="text" readonly name="east_Wuling_5th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+												  <td><h3 id="east_Wuling_6th_time"></td>
+												  <td><input class = "east_Wuling_seg_time" type="text" value = "0:30:00" name="east_Wuling_6th_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_cumu_time" type="text" readonly name="east_Wuling_6th_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_seg_Pavg" type="text" readonly name="east_Wuling_6th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+												  <td><h3 id="east_Wuling_7th_time"></td>
+												  <td><input class = "east_Wuling_seg_time" type="text" value = "1:00:00" name="east_Wuling_7th_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_cumu_time" type="text" readonly name="east_Wuling_7th_cumu_time" style="color:#000000"><br></td>
+												  <td><input class = "east_Wuling_seg_Pavg" type="text" readonly name="east_Wuling_7th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+											  </table>
+											  <table id="360_520_km" style="display:none;">
+												<tr>
+													<th><h3 id="drafting_or_not"></h3></th>
+													<th><input type="button" value="全選/Chk ALL" onclick="selectAll()">
+														<input type="button" value="全消/UnChk ALL" onclick="unSelectAll()"><h3> </h3></th>
+													<th><h3 id="360_520_km_Segment"></h3></th>
+													<th><h3 id="360_520_km_Segment_time"></h3></th>
+													<th><h3 id="360_520_km_Cumulated_time"></h3></th>
+													<th><h3 id="360_520_km_Segment_power"></h3></th>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_1st_time_draft" value="1"><label for="360_520_km_1st_time_draft"><td><h3 id="360_520_km_1st_time"></h3></label></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "35.1" name="360_520_km_1st_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:00:00" name="360_520_km_1st_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_1st_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_1st_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_2nd_time_draft" value="1"><label for="360_520_km_2nd_time_draft"><td><h3 id="360_520_km_2nd_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "44.8" name="360_520_km_2nd_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:20:00" name="360_520_km_2nd_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_2nd_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_2nd_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_3rd_time_draft" value="1"><label for="360_520_km_3rd_time_draft"><td><h3 id="360_520_km_3rd_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "60.4" name="360_520_km_3rd_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:45:00" name="360_520_km_3rd_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_3rd_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_3rd_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_4th_time_draft" value="1"><label for="360_520_km_4th_time_draft"><td><h3 id="360_520_km_4th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "40.1" name="360_520_km_4th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:20:00" name="360_520_km_4th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_4th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_4th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_5th_time_draft" value="1"><label for="360_520_km_5th_time_draft"><td><h3 id="360_520_km_5th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "48.4" name="360_520_km_5th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:28:00" name="360_520_km_5th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_5th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_5th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_6th_time_draft" value="1"><label for="360_520_km_6th_time_draft"><td><h3 id="360_520_km_6th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "40.5" name="360_520_km_6th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:10:00" name="360_520_km_6th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_6th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_6th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_7th_time_draft" value="1"><label for="360_520_km_7th_time_draft"><td><h3 id="360_520_km_7th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "40.9" name="360_520_km_7th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:10:00" name="360_520_km_7th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_7th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_7th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_8th_time_draft" value="1"><label for="360_520_km_8th_time_draft"></label><td><h3 id="360_520_km_8th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "37.1" name="360_520_km_8th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:00:00" name="360_520_km_8th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_8th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_8th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_9th_time_draft" value="1"><label for="360_520_km_9th_time_draft"></label><td><h3 id="360_520_km_9th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "37.9" name="360_520_km_9th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:00:00" name="360_520_km_9th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_9th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_9th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_10th_time_draft" value="1"><label for="360_520_km_10th_time_draft"></label><td><h3 id="360_520_km_10th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "41.1" name="360_520_km_10th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:10:00" name="360_520_km_10th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_10th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_10th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_11th_time_draft" value="1"><label for="360_520_km_11th_time_draft"></label><td><h3 id="360_520_km_11th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "34.3" name="360_520_km_11th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:00:00" name="360_520_km_11th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_11th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_11th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_12th_time_draft" value="1"><label for="360_520_km_12th_time_draft"></label><td><h3 id="360_520_km_12th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "48.4" name="360_520_km_12th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:20:00" name="360_520_km_12th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_12th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_12th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_13th_time_draft" value="1"><label for="360_520_km_13th_time_draft"></label><td><h3 id="360_520_km_13th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "47.9" name="360_520_km_13th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:30:00" name="360_520_km_13th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_13th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_13th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_14th_time_draft" value="1"><label for="360_520_km_14th_time_draft"></label><td><h3 id="360_520_km_14th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "48.4" name="360_520_km_14th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:20:00" name="360_520_km_14th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_14th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_14th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+												<tr>
+													<td><input class = "360_520_km_draft" type="checkbox" id="360_520_km_15th_time_draft" value="1"><label for="360_520_km_15th_time_draft"></label><td><h3 id="360_520_km_15th_time"></td>
+													<td><input class = "360_520_km_seg_dist" type="text" value = "48.4" name="360_520_km_15th_dist" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_time" type="text" value = "1:20:00" name="360_520_km_15th_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_cumu_time" type="text" readonly name="360_520_km_15th_cumu_time" style="color:#000000"><br></td>
+													<td><input class = "360_520_km_seg_Pavg" type="text" readonly name="360_520_km_15th_Pavg" readonly style="color:#000000"></td>
+												</tr>
+											  	</table>
 										  </form>
 									</div>
 								</section>
