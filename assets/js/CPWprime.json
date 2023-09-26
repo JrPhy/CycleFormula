@@ -32,7 +32,7 @@
       "#Pmax": "最高瓦數/速率(W/kph)",
       "#CP": "臨界瓦數/速率(W/kph)",
       "#Wprime": "無氧能量/距離(kJ/km)",
-      "#license": "License 時間 2023/06/30 23:59:59 GMT+08:00",
+      "#license": "License 時間 2023/12/31 23:59:59 GMT+08:00",
       "#copyright": "內容與算法: 單車新幹線 Cycle Formula",
       "#view": "觀看數"
     },
@@ -64,7 +64,7 @@
       "#Pmax": "Maximum Power/Speed(W/kph)",
       "#CP": "Critical Power/Speed(W/kph)",
       "#Wprime": "Anaerobic Energy/Distance(kJ/km)",
-      "#license": "License expire 2023/06/30 23:59:59 GMT+08:00",
+      "#license": "License expire 2023/12/31 23:59:59 GMT+08:00",
       "#copyright": "Content and algorithm: 單車新幹線 Cycle Formula",
       "#view": "View"
     }
