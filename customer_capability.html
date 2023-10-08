@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<title >風阻轉重量計算機 Aero to Weight Calculator</title>
+		<title>個人能力 capability</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="用理論計算來分析單車運動，爬坡路段計算機幫助你計算爬武嶺的目標做功與均瓦" />
@@ -36,7 +36,7 @@
 		<script src="assets/js/langSwitcher.js"></script>
 		<script>
 			$(document).ready(function(){
-				$.MultiLanguage('assets/js/AtoW.json');
+				$.MultiLanguage('assets/js/performance/capability.json');
 			})
 		</script>
 	</head>
@@ -60,30 +60,75 @@
 								<section id="banner">
 									<div class="content">
 										<p>
-											<button onclick="$.MultiLanguage('assets/js/AtoW.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
-											<button onclick="$.MultiLanguage('assets/js/AtoW.json', 'en')" class="btn">English</button>
+											<button onclick="$.MultiLanguage('assets/js/performance/capability.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+											<button onclick="$.MultiLanguage('assets/js/performance/capability.json', 'en')" class="btn">English</button>
 										</p>
 										<header>
-											<h1 id="AtoW"><br /></h1>
-											<h3 id="AtoWHowToUse"></h3>
+											<h1 id="Capability"><br /></h1>
+											<h3 id="CapabilityDescription"><br /></h3>
 										</header>
 										<form name="form" id="form" method=post>
 											<table style="color:#aaaaaa">
-											  <tr>
-												<td><h4 id="CdA"></h4> <input type="number" value="0.3" name="CdA"><br/></td>
-												<td><h4 id="slope"></h4> <input type="number" value="5" name="slope"><br/></td>
-											  </tr>
-											  <tr>
-												<td><h4 id="speed"></h4> <input type="number" value="15" name="speed"><br/></td>
-												<td><h4 id="percent"></h4> <input type="number" value="1" name="percent"><br/></td>
-											  </tr>
-											  <tr>
-												<td><br><input type="button" value="計算/Calculate" onclick="AtoWCal(this.form)"><br/></td>
-												<td><h4 id="weight"></h4> <input type="text" name="weight" readonly style="color:#000000"><br/></td>
-											  </tr>
-											  </td>
+												<tr>
+													<td><h4 id="VO2max_power"></h4> <input type="number" value="300" name="VO2max_power" readonly><br/></td>
+													<td><h4 id="Critical_power"></h4> <input type="number" value="240" name="Critical_power" readonly><br/></td>
+												</tr>
+												<tr>
+													<td><h4 id="CP_1"></h4> <input type="number" value="400" name="CP_1"><br/></td>
+													<td><h4 id="CP_20"></h4> <input type="number" value="260" name="CP_20" readonly><br/></td>
+												</tr>
+												<tr>
+													<td><h4 id="p_max"></h4> <input type="number" value="888" name="p_max"><br/></td>
+													<td><h4 id="hr_max"></h4> <input type="number" value="200" name="hr_max"><br/></td>
+												</tr>
+												<tr>
+													<td><h4 id="WPrime"></h4> <input type="number" value="20000" name="WPrime" readonly><br/></td>
+													<th><br><input type="button" value="修改/MODIFY" onclick="MAX_P_HR_MOD(this.form)"></th>
+												</tr>
+												<tr>
+													<td><input type="number" value="20" name="incr" readonly><br/></td>
+													<td><input type="text" value="每分鐘增加 20 W/ Increase 20 W per minute" name="protocol" readonly style="color:#000000"><br></td>
+										  		</td>
 											</table>
-										  </form>
+										</form>
+										<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+											<div style="width: 80%;"><canvas id="line-chart"></canvas></div>
+											<script>
+												var incr = document.form.incr.value;
+												var CP_20 = document.form.CP_20.value;
+												const DATA_COUNT = 1200;
+												const labels = [];
+												const datapoints = [];
+												var j = 0;
+												for (let i = 0; i < DATA_COUNT; ++i) {
+													if (i <= 300) power = CP_20*0.5;
+													else if (300+60*j < i <= 360+60*(j+1)) power = CP_20*0.5+ incr*j;
+													if (i > 300 && i%60 == 0) j = j+1;
+													labels.push(power);
+													datapoints.push(i);
+												}
+												
+												new Chart(document.getElementById("line-chart"), {
+													type: 'line',
+													data: {
+														labels: datapoints,
+														datasets: [{
+															data: labels,
+															label: '最大攝氧量瓦數/VO2max power test',
+															borderColor: "#c45850",
+															fill: false,
+															tension: 0.0
+														}
+														]
+													},
+													options: {
+														title: {
+														display: true,
+														text: '最大攝氧量瓦數/VO2max power test'
+														},
+													}
+													});
+												</script>
 									</div>
 								</section>  
 								<p style="color:#aaaaaa" id="license"></p>

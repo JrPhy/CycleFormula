@@ -36,7 +36,7 @@
 		<script src="assets/js/langSwitcher.js"></script>
 		<script>
 			$(document).ready(function(){
-				$.MultiLanguage('assets/js/AtoW.json');
+				$.MultiLanguage('assets/js/performance/workout.json');
 			})
 		</script>
 	</head>
@@ -60,32 +60,125 @@
 								<section id="banner">
 									<div class="content">
 										<p>
-											<button onclick="$.MultiLanguage('assets/js/AtoW.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
-											<button onclick="$.MultiLanguage('assets/js/AtoW.json', 'en')" class="btn">English</button>
+											<button onclick="$.MultiLanguage('assets/js/performance/workout.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+											<button onclick="$.MultiLanguage('assets/js/performance/workout.json', 'en')" class="btn">English</button>
 										</p>
-										<header>
-											<h1 id="AtoW"><br /></h1>
-											<h3 id="AtoWHowToUse"></h3>
-										</header>
-										<form name="form" id="form" method=post>
-											<table style="color:#aaaaaa">
-											  <tr>
-												<td><h4 id="CdA"></h4> <input type="number" value="0.3" name="CdA"><br/></td>
-												<td><h4 id="slope"></h4> <input type="number" value="5" name="slope"><br/></td>
-											  </tr>
-											  <tr>
-												<td><h4 id="speed"></h4> <input type="number" value="15" name="speed"><br/></td>
-												<td><h4 id="percent"></h4> <input type="number" value="1" name="percent"><br/></td>
-											  </tr>
-											  <tr>
-												<td><br><input type="button" value="計算/Calculate" onclick="AtoWCal(this.form)"><br/></td>
-												<td><h4 id="weight"></h4> <input type="text" name="weight" readonly style="color:#000000"><br/></td>
-											  </tr>
-											  </td>
-											</table>
-										  </form>
+										<form method=post enctype=multipart/form-data>
+											<tr>
+												<input type=file name=file style="color:#ffffff">
+												<input type=submit value=Upload>
+												<input type="text" name="status" value="{{ status }}">
+											</tr>
+										</form>
 									</div>
-								</section>  
+								</section>
+								<table id="360_520_km" style="display: none;">
+									<tr>
+										<td><h4 id="CP_5"></h4> <input type="text" value="200, 287, 244" name="CP_5" readonly><br/></td>
+										<td><h4 id="work_time"></h4> <input type="text" value="2023/02/22, 2023/02/24, 2023/02/28 " name="work_time"><br/></td>
+									</tr>
+									<tr>
+										<td><h4 id="CP_1"></h4> <input type="text" value="245, 289, 276" name="CP_1"><br/></td>
+										<td><h4 id="CP_20"></h4> <input type="text" value="156, 200, 188" name="CP_20" readonly><br/></td>
+									</tr>
+									<tr>
+										<td><h4 id="carb"></h4> <input type="text" value="500, 698, 800" name="carb"><br/></td>
+										<td><h4 id="fat"></h4> <input type="text" value="100, 152, 196" name="fat" readonly><br/></td>
+									</tr>
+								</table>
+								</section> 
+								<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+								<div style="width: 80%;"><canvas id="line-chart"></canvas></div>
+								<script>
+									const CP_1 = document.getElementsByName("CP_1")[0].value.split(',');
+									const CP_5 = document.getElementsByName("CP_5")[0].value.split(',');
+									const CP_20 = document.getElementsByName("CP_20")[0].value.split(',');
+									const work_time = document.getElementsByName("work_time")[0].value.split(',');
+									console.log(CP_1)
+									new Chart(document.getElementById("line-chart"), {
+										type: 'line',
+										data: {
+											labels: work_time,
+											datasets: [{
+												data: CP_1,
+												label: 'CP_1(W)',
+												borderColor: "#c45850",
+												fill: false,
+												tension: 0.0,
+												yAxisID: 'y',
+											},
+											{
+												data: CP_5,
+												label: 'CP_5(W)',
+												borderColor: "#cff850",
+												fill: false,
+												tension: 0.0,
+												yAxisID: 'y',
+											},
+											{
+												data: CP_20,
+												label: 'CP_20(W)',
+												borderColor: "#c00850",
+												fill: false,
+												tension: 0.0,
+												yAxisID: 'y',
+											}]
+											
+										},
+										options: {
+											title: {
+											display: true,
+											text: ''
+											},
+											scales: {
+												y: {
+													type: 'linear',
+													display: true,
+													position: 'left',
+													grid: {
+													drawOnChartArea: false, // only want the grid lines for one axis to show up
+													},
+												},
+											}
+										}
+										});
+									</script>
+									<div style="width: 80%;"><canvas id="bar-chart"></canvas></div>
+									<script>
+									const fat = document.getElementsByName("fat")[0].value.split(',');
+									const carb = document.getElementsByName("carb")[0].value.split(',');
+										new Chart(document.getElementById("bar-chart"), {
+											type: 'bar',
+											data: {
+												labels: work_time,
+												datasets: [{
+													label: 'carb(kJ)',
+													backgroundColor: "blue",
+													data: carb,
+												}, {
+													label: 'fat(kJ)',
+													backgroundColor: "green",
+													data: fat,
+												}],
+											},
+											options: {
+												plugins: {
+													title: {
+														display: true,
+														text: ''
+													},
+												},
+												scales: {
+													x: {
+														stacked: true,
+													},
+													y: {
+														stacked: true
+													}
+												}
+											}
+										});
+									</script> 
 								<p style="color:#aaaaaa" id="license"></p>
 								<p class="copyright" id="copyright" style="color:#aaaaaa">&copy; </p>
 								<div class="post__meta meta">

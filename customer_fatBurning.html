@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<title >風阻轉重量計算機 Aero to Weight Calculator</title>
+		<title >最大燃脂強度計算機 Maximum Fat-Burning MFB_Intensity Calculator</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="用理論計算來分析單車運動，爬坡路段計算機幫助你計算爬武嶺的目標做功與均瓦" />
@@ -31,12 +31,11 @@
 		}
 		</script>
 		<script src="assets/js/getData.js"></script>
-		<script src="assets/js/CycleFormula.js"></script>
 		<script src="assets/js/jquery.min.js"></script>
 		<script src="assets/js/langSwitcher.js"></script>
 		<script>
 			$(document).ready(function(){
-				$.MultiLanguage('assets/js/AtoW.json');
+				$.MultiLanguage('assets/js/performance/fatBurning.json');
 			})
 		</script>
 	</head>
@@ -59,31 +58,28 @@
 							<!-- Banner -->
 								<section id="banner">
 									<div class="content">
-										<p>
-											<button onclick="$.MultiLanguage('assets/js/AtoW.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
-											<button onclick="$.MultiLanguage('assets/js/AtoW.json', 'en')" class="btn">English</button>
-										</p>
 										<header>
-											<h1 id="AtoW"><br /></h1>
-											<h3 id="AtoWHowToUse"></h3>
+											<p>
+												<button onclick="$.MultiLanguage('assets/js/performance/fatBurning.json', 'zh-tw')" class="btn">中文</button><span>&nbsp;</span>
+												<button onclick="$.MultiLanguage('assets/js/performance/fatBurning.json', 'en')" class="btn">English</button>
+											</p>
+											<h1 id="fatBurning"></h1>
+											<h3 id="fatBurningHowToUse"></h3>
 										</header>
 										<form name="form" id="form" method=post>
 											<table style="color:#aaaaaa">
-											  <tr>
-												<td><h4 id="CdA"></h4> <input type="number" value="0.3" name="CdA"><br/></td>
-												<td><h4 id="slope"></h4> <input type="number" value="5" name="slope"><br/></td>
-											  </tr>
-											  <tr>
-												<td><h4 id="speed"></h4> <input type="number" value="15" name="speed"><br/></td>
-												<td><h4 id="percent"></h4> <input type="number" value="1" name="percent"><br/></td>
-											  </tr>
-											  <tr>
-												<td><br><input type="button" value="計算/Calculate" onclick="AtoWCal(this.form)"><br/></td>
-												<td><h4 id="weight"></h4> <input type="text" name="weight" readonly style="color:#000000"><br/></td>
-											  </tr>
-											  </td>
+												<tr>
+													<td><h4 id="VO2max_inte"></h4> <input type="number" value="330" name="VO2max_inte"></td>
+													<td><h4 id="Duration"></h4> <input type="number" value="60" name="Duration"></td>
+													<th><br><input type="button" value="計算/Cal" onclick="FatBurnCal(this.form)"></th>
+												</tr>
+												<tr>
+													<td><h4 id="MFB_Intensity"></h4> <input type="number" readonly value="70" name="MFB_Intensity"></td>
+													<td><h4 id="Calories"></h4> <input type="number" readonly name="Calories"></td>
+													<td><h4 id="Fat_Burn"></h4> <input type="number" readonly name="Fat_Burn"></td>
+												</tr>
 											</table>
-										  </form>
+										</form>
 									</div>
 								</section>  
 								<p style="color:#aaaaaa" id="license"></p>
