@@ -44,17 +44,17 @@ function routeCal(form)
     {
         form.WORK.value = Module._workClimb(riderMass, bikeMass, equipMass, water, food, route, timeSeg, bike);
         form.Pavg.value = (form.WORK.value*1000/timeSeg).toFixed(1);
-        if (form.WORK.value == -2)
+        if (form.WORK.value == 2)
         {
             form.WORK.value = "license 過期了";
             form.Pavg.value = "請聯絡作者";
         }
-        else if (form.WORK.value == -3)
+        else if (form.WORK.value == 3)
         {
             form.WORK.value = "license 被修改過";
             form.Pavg.value = "請聯絡作者";
         }
-        else if(form.WORK.value == -1 || isNaN(form.Pavg.value))
+        else if(form.WORK.value == 1 || isNaN(form.Pavg.value))
         {
             form.WORK.value = "請輸入正確的數字";
             form.Pavg.value = "請輸入正確的數字";
@@ -73,9 +73,9 @@ function AtoWCal(form)
     else
     {
         form.weight.value = Module._AtoW(CdA, slope, speed, percent);
-        if (form.weight.value == -2) {form.weight.value = "license 過期了，請聯絡作者";}
-        else if (form.weight.value == -3) {form.weight.value = "license 被修改過，請聯絡作者";}
-        else if (form.weight.value == -1) {form.weight.value = "請輸入正確的數字";}
+        if (form.weight.value == 2) {form.weight.value = "license 過期了，請聯絡作者";}
+        else if (form.weight.value == 3) {form.weight.value = "license 被修改過，請聯絡作者";}
+        else if (form.weight.value == 1) {form.weight.value = "請輸入正確的數字";}
     }
 }
 
@@ -145,17 +145,17 @@ function TTCal(form)
                                             bike, pose, deep, Helmet, equip[0], equip[1], equip[2], windSpeed,
                                             draftTime);
         form.Pavg.value = (form.WORK.value*1000/timeSeg).toFixed(1);
-        if (form.WORK.value == -2)
+        if (form.WORK.value == 2)
         {
             form.WORK.value = "license 過期了";
             form.Pavg.value = "請聯絡作者";
         }
-        else if (form.WORK.value == -3)
+        else if (form.WORK.value == 3)
         {
             form.WORK.value = "license 被修改過";
             form.Pavg.value = "請聯絡作者";
         }
-        else if(form.WORK.value == -1 || isNaN(form.Pavg.value))
+        else if(form.WORK.value == 1 || isNaN(form.Pavg.value))
         {
             form.WORK.value = "請輸入正確的數字";
             form.Pavg.value = "請輸入正確的數字";
@@ -202,17 +202,17 @@ function CPWprime(form)
     {
         form.CP.value = Module._cp(pmax, power0, power1, duration0, duration1);
         form.Wprime.value = (Module._WPrime(pmax, power0, power1, duration0, duration1, form.CP.value)/1000).toFixed(2);
-        if (form.CP.value == -2)
+        if (form.CP.value == 2)
         {
             form.CP.value = "license 過期了";
             form.Wprime.value = "請聯絡作者";
         }
-        else if (form.CP.value == -3)
+        else if (form.CP.value == 3)
         {
             form.CP.value = "license 被修改過";
             form.Wprime.value = "請聯絡作者";
         }
-        else if(form.CP.value == -1 || isNaN(form.CP.value))
+        else if(form.CP.value == 1 || isNaN(form.CP.value))
         {
             form.CP.value = "請輸入正確的數字";
             form.Wprime.value = "請輸入正確的數字";
