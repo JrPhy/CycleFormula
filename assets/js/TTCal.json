@@ -65,7 +65,7 @@
       "#draftTime": "跟車時間(%)",
       "#WORK": "預估做功 (kJ)",
       "#Pavg": "平均功率 (W)",
-      "#license": "License 時間 2023/12/31 23:59:59 GMT+08:00",
+      "#license": "License 時間 2024/03/31 23:59:59 GMT+08:00",
       "#copyright": "內容與算法: 單車新幹線 Cycle Formula",
       "#view": "觀看數"
     },
@@ -133,7 +133,7 @@
       "#draftTime": "Drafting time(%)",
       "#WORK": "Estimate work (kJ)",
       "#Pavg": "Average power (W)",
-      "#license": "License expire 2023/12/31 23:59:59 GMT+08:00",
+      "#license": "License expire 2024/03/31 23:59:59 GMT+08:00",
       "#copyright": "Content and algorithm: 單車新幹線 Cycle Formula",
       "#view": "View"
     }
