@@ -78,7 +78,7 @@ html {
   box-sizing: inherit; }
 
 body {
-  background: #111111; }
+  background: #333333; }
   body.is-preload *, body.is-preload *:before, body.is-preload *:after, body.is-resizing *, body.is-resizing *:before, body.is-resizing *:after {
     -moz-animation: none !important;
     -webkit-animation: none !important;
@@ -1068,7 +1068,7 @@ select {
   padding-right: 2.75em;
   text-overflow: ellipsis; }
   select option {
-    color: #000000;
+    color: #333333;
     background: #ffffff; }
   select:focus::-ms-value {
     background-color: transparent; }
@@ -1933,7 +1933,7 @@ button,
   -webkit-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
   -ms-transition: margin-left 0.5s ease, box-shadow 0.5s ease;
   transition: margin-left 0.5s ease, box-shadow 0.5s ease;
-  background-color: #111111;
+  background-color: #333333;
   font-size: 0.9em;
   position: relative;
   width: 26em; }
@@ -1954,7 +1954,7 @@ button,
         margin-bottom: 0;
         padding-bottom: 0; }
     #sidebar > .inner > .alt {
-      background-color: #111111;
+      background-color: #333333;
       border-bottom: 0;
       margin: -2.22222em 0 4.44444em -2.22222em;
       padding: 2.22222em;
